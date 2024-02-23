@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 
-import { IsString, MaxLength, MinLength, IsEmail, Matches } from 'class-validator';
+import { IsString, MaxLength, MinLength, IsEmail, Matches, IsOptional } from 'class-validator';
 
 export class AuthUserDto {
 
@@ -9,6 +9,7 @@ export class AuthUserDto {
     @MaxLength(8)
     username: string;
 
+    @IsOptional()
     @IsEmail({}, { message: 'Invalid email format' })
     email: string;
 

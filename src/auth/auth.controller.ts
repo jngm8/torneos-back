@@ -13,8 +13,11 @@ export class AuthController {
 
     @Post('signup')
     signUp(@Body() authUserDto:AuthUserDto): Promise<void>{
-
         return this.authService.signUp(authUserDto);
+    }
 
+    @Post('signin')
+    signin(@Body() authUserDto:AuthUserDto): Promise<string> {
+        return this.authService.signIn(authUserDto);
     }
 }
