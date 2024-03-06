@@ -1,8 +1,12 @@
-/* eslint-disable prettier/prettier */
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Req } from '@nestjs/common';
 import { AuthUserDto } from './dto/auth-user.dto';
 import { Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { Role } from '../common/enum/role.enum';
+import { Auth } from './decorators/auth.decorator';
+import RequestUser from './interfaces/request-user.interface';
+
+
 
 @Controller('auth')
 export class AuthController {
@@ -19,5 +23,13 @@ export class AuthController {
     @Post('signin')
     signin(@Body() authUserDto:AuthUserDto): Promise<{accessToken: string}> {
         return this.authService.signIn(authUserDto);
+    }
+
+
+
+    @Get('profile')
+    @Auth([Role.ADMIN])
+    profile(@Req() req: RequestUser) {
+        return req.user;
     }
 }

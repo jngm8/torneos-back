@@ -1,5 +1,5 @@
-/* eslint-disable prettier/prettier */
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Role } from '../common/enum/role.enum';
 
 @Entity()
 export class UserEntity{
@@ -9,9 +9,9 @@ export class UserEntity{
   @Column({unique:true})
   username: string;
 
-  @Column()
+  @Column({select: false})
   password: string;
 
-  // @Column()
-  // roles: string[];
+  @Column({type:'enum', default: Role.USER, enum: Role})
+  roles: Role[];
 }

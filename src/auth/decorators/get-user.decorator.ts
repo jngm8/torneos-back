@@ -1,6 +1,5 @@
-/* eslint-disable prettier/prettier */
 import { createParamDecorator, ExecutionContext } from "@nestjs/common";
-import { UserEntity } from "./user.entity";
+import { UserEntity } from "../../user/user.entity";
 
 export const GetUser  = createParamDecorator((_data, ctx: ExecutionContext): UserEntity =>{
 
