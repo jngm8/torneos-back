@@ -43,7 +43,7 @@ export class AuthService {
 
    }
 
-   async signIn(authUserDto:AuthUserDto) : Promise<{accessToken:string, roles: Role[]}> {
+   async signIn(authUserDto:AuthUserDto) : Promise<{accessToken:string, roles: Role[],user}> {
     const { username, password } = authUserDto;
     
     const user = await this.findOneByUsernameWithPassword(username);
@@ -53,7 +53,7 @@ export class AuthService {
 
         const accessToken: string = await this.jwtService.sign(payload);
 
-        return { accessToken, roles: user.roles};
+        return { accessToken, roles: user.roles,user: user.username};
     } else {
         throw new UnauthorizedException("Please check your credentials")
     }
