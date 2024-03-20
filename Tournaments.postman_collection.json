@@ -1,0 +1,470 @@
+{
+	"info": {
+		"_postman_id": "b52423f0-edb7-40f9-8472-e761bb81ff4e",
+		"name": "Tournaments",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31735595"
+	},
+	"item": [
+		{
+			"name": "Create tournament",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"TFC Open\",\r\n    \"address\" : \"La Verdieri Club\",\r\n    \"date\":\"24/02/2024\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/tournaments",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create tournament",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\": \"TFC Open\",\r\n    \"Address\" : \"La Verdieri Club\",\r\n    \"Date\":\"24/02/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/tournaments",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\r\n    \"name\": \"TFC Open\",\r\n    \"address\" : \"La Verdieri Club\",\r\n    \"date\":\"24/02/2024\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all tournaments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all tournaments",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/tournaments",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"name\": \"TFC Open\",\r\n        \"address\" : \"La Verdieri Club\",\r\n        \"start_date\": \"2024-04-01\",\r\n        \"end_date\": \"2024-04-05\",\r\n        \"users\": [\r\n            {\r\n            \"username\": \"Carlos\",\r\n            \"role\": \"user\"\r\n            },\r\n            {\r\n            \"username\": \"Andres\",\r\n            \"role\": \"user\"\r\n            },\r\n        ],\r\n        \"organizer\": {\r\n            \"company\": \"TurboBet\",\r\n            \"roles\":[\r\n                \"admin\",\r\n                \"user\"\r\n            ]\r\n        }\r\n    },\r\n    {\r\n    \"name\": \"Padel Tour\",\r\n    \"address\" : \"Heroes Club\",\r\n    \"start_date\": \"2024-02-10\",\r\n    \"end_date\": \"2024-09-13\",\r\n    \"users\": [\r\n        {\r\n        \"username\": \"Pedro\",\r\n        \"role\": \"user\"\r\n        },\r\n        {\r\n        \"username\": \"Camilo\",\r\n        \"role\": \"user\"\r\n        },\r\n    ],\r\n    \"organizer\": {\r\n        \"company\": \"PadelHouse\",\r\n        \"roles\":[\r\n            \"admin\",\r\n            \"user\"\r\n            ]\r\n        }\r\n    }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Get a tournament",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/{{tournament_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"{{tournament_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get a tournament",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/tournaments/{{tournament_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournament_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"name\": \"TFC Open\",\r\n    \"address\" : \"La Verdieri Club\",\r\n    \"date\":\"24/02/2024\",\r\n    \"athletes\": [\r\n        {\r\n        \"username\": \"Carlos\",\r\n        \"roles\": [\r\n            \"user\"\r\n        ]\r\n        },\r\n        {\r\n        \"username\": \"Andres\",\r\n        \"roles\": [\r\n            \"user\"\r\n        ]\r\n        },\r\n    ],\r\n    \"organizer\": {\r\n        \"company\": \"TurboBet\",\r\n        \"roles\":[\r\n            \"admin\",\r\n            \"user\"\r\n        ]\r\n    }\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Get an invalid tournament",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get an invalid tournament",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournaments/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The tournament with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Update a tournament",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"TFC Open\",\r\n    \"address\" : \"La Verdieri Club\",\r\n    \"date\":\"24/02/2025\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/tournaments/{{tournament_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"{{tournament_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update a tournament",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"TFC Open\",\r\n    \"address\" : \"La Verdieri Club\",\r\n    \"date\":\"24/02/2025\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}}/tournaments/{{tournament_id}}",
+							"host": [
+								"{{baseURL}}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournament_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\r\n    \"name\": \"TFC Open\",\r\n    \"address\" : \"La Verdieri Club\",\r\n    \"date\":\"24/02/2025\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Update an invalid museum",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update an invalid museum",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournaments/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The tournament with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete a tournament",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/tournaments/{{tournament_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"{{tournament_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete a tournament",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/tournaments/{{tournament_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournament_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete an invalid museum",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an invalid museum",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournaments/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The museum with the given id was not found\"\r\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3001",
+			"type": "string"
+		},
+		{
+			"key": "tournament_id",
+			"value": "48a9ab90-1276-11ed-861d-0242ac120002",
+			"type": "string"
+		}
+	]
+}

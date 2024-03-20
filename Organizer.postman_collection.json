@@ -1,0 +1,18 @@
+{
+	"info": {
+		"_postman_id": "7aa26cdc-1106-4b9b-8893-afce3f39cc98",
+		"name": "Organizer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31735595"
+	},
+	"item": [
+		{
+			"name": "Create an organizer",
+			"request": {
+				"method": "POST",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
