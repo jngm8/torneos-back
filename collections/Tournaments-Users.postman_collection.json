@@ -1,0 +1,812 @@
+{
+	"info": {
+		"_postman_id": "414f2ac6-8ecf-4723-9750-cdec2da20e3b",
+		"name": "Tournaments-Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31735595"
+	},
+	"item": [
+		{
+			"name": "Add a user to  tournament",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/{{user_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"{{tournament_id}}",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add an user to  tournament",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/{{user_id}}.\n\n",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournament_id}}",
+								"users",
+								"{{user_id}}.\n\n"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\r\n    \"name\": \"TFC Open Tennis Tour\",\r\n    \"address\" : \"La Verdieri Club\",\r\n    \"date\":\"24/02/2024\",\r\n    \"users\": [\r\n         {\r\n        \"id\": \"6f9e4d68-1be9-4f11-a690-1f6940bb54dd\",\r\n        \"username\": \"Carlos\",\r\n        \"role\": \"user\"\r\n        }\r\n    ],\r\n    \"organizer\": {\r\n        \"company\": \"TFC Open\",\r\n        \"roles\":[\r\n            \"admin\",\r\n            \"user\"\r\n        ]\r\n    }\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Add an invalid user to a tournament",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"{{tournament_id}}",
+						"users",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add an invalid user to a tournament",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournament_id}}",
+								"users",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The user with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Add a user to an invalid tournament",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournament/00000000-0000-0000-0000-000000000000/users/{{user_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournament",
+						"00000000-0000-0000-0000-000000000000",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add a user to an invalid tournament",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournament/00000000-0000-0000-0000-000000000000/users/{{user_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournament",
+								"00000000-0000-0000-0000-000000000000",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The tournament with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Get a user from a tournament",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/{{user_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"{{tournament_id}}",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get an user from a tournament",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/{{user_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournament_id}}",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"id\": \"80bc6add-a5db-4504-b6ad-55fb0b29acdc\",\r\n    \"username\": \"Andrea\",\r\n    \"roles\":\"user\"\r\n},"
+				}
+			]
+		},
+		{
+			"name": "Get an invalid user from a tournament",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournament/{{tournament_id}}/users/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournament",
+						"{{tournament_id}}",
+						"users",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get an invalid user from a tournament",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournament/{{tournament_id}}/users/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournament",
+								"{{tournament_id}}",
+								"users",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The user with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Get an user from an invalid tournament",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/00000000-0000-0000-0000-000000000000/users/{{user_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"00000000-0000-0000-0000-000000000000",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get a user from an invalid tournament",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournaments/00000000-0000-0000-0000-000000000000/users/{{user_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"00000000-0000-0000-0000-000000000000",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The tournament with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Get a user not associated to a tournament",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/{{user_id2}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"{{tournament_id}}",
+						"users",
+						"{{user_id2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get a user not associated to a tournament",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/{{user_id2}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournament_id}}",
+								"users",
+								"{{user_id2}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 412,\r\n   \"message\": \"The user with the given id is not associated to the tournament\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all users from a tournament",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"{{tournament_id}}",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all users from a tournament",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournament_id}}",
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"id\": \"6f9e4d68-1be9-4f11-a690-1f6940bb54dd\",\r\n        \"username\": \"Carlos\",\r\n        \"role\": \"user\"\r\n    },\r\n    {\r\n        \"id\": \"et8e4d68-3be4-5f21-a390-1r6940aa51dd\",\r\n        \"username\": \"Andres\",\r\n        \"role\": \"user\"\r\n    },\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Get all user from an invalid tournament",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/00000000-0000-0000-0000-000000000000/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"00000000-0000-0000-0000-000000000000",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all user from an invalid tournament",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournaments/00000000-0000-0000-0000-000000000000/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"00000000-0000-0000-0000-000000000000",
+								"users"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The tournament with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Update users from a tournament",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n   {\r\n       \"id\": \"{{user_id2}}\"\r\n   }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"{{tournament_id}}",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update users from a tournament",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n   {\r\n       \"id\": \"{{user_id2}}\"\r\n   }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournament_id}}",
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\r\n    \"name\": \"TFC Open Tennis Tour\",\r\n    \"address\" : \"La Verdieri Club\",\r\n    \"date\":\"24/02/2024\",\r\n    \"users\": \r\n    [\r\n        {\r\n            \"id\":\"rh3e4w69-1be9-4f11-a690-1f6940bb54dd\",\r\n            \"username\": \"Andrea\",\r\n            \"roles\":\"user\"\r\n        },\r\n        {\r\n            \"id\": \"6f9e4d68-1be9-4f11-a690-1f6940bb54dd\",\r\n            \"username\": \"Carlos\",\r\n            \"role\": \"user\"\r\n        },\r\n        {\r\n            \"id\": \"et8e4d68-3be4-5f21-a390-1r6940aa51dd\",\r\n            \"username\": \"Andres\",\r\n            \"role\": \"user\"\r\n        },\r\n    ],\r\n    \"organizer\": {\r\n        \"company\": \"TFC Open\",\r\n        \"roles\":[\r\n            \"admin\",\r\n            \"user\"\r\n        ]\r\n    }\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Update invalid users from a tournament",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n   {\r\n       \"id\": \"00000000-0000-0000-0000-000000000000\"\r\n   }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"{{tournament_id}}",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update invalid users from a tournament",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n   {\r\n       \"id\": \"00000000-0000-0000-0000-000000000000\"\r\n   }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournament_id}}",
+								"users"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The user with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Update users from an invalid tournament",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/00000000-0000-0000-0000-000000000000/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"00000000-0000-0000-0000-000000000000",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update users from an invalid tournament",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournaments/00000000-0000-0000-0000-000000000000/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"00000000-0000-0000-0000-000000000000",
+								"users"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The tournament with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete a user from a tournament",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/{{user_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"{{tournament_id}}",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete a user from a tournament",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/{{user_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournament_id}}",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete a user from an invalid tournament",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/00000000-0000-0000-0000-000000000000}/users/{{user_id2}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"00000000-0000-0000-0000-000000000000}",
+						"users",
+						"{{user_id2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete a user from an invalid tournament",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournaments/00000000-0000-0000-0000-000000000000}/users/{{user_id2}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"00000000-0000-0000-0000-000000000000}",
+								"users",
+								"{{user_id2}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The tournament with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete an invalid user from a tournament",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/00000000-0000-0000-0000-000000000000\n\n",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"{{tournament_id}}",
+						"users",
+						"00000000-0000-0000-0000-000000000000\n\n"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an invalid user from a tournament",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/00000000-0000-0000-0000-000000000000\n\n",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournament_id}}",
+								"users",
+								"00000000-0000-0000-0000-000000000000\n\n"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The user with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete a user not associated to a tournament",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/{{user_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tournaments",
+						"{{tournament_id}}",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete a user not associated to a tournament",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/{{user_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournament_id}}",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 412,\r\n   \"message\": \"The user with the given id is not associated to the tournament\"\r\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3001",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "6f9e4d68-1be9-4f11-a690-1f6940bb54dd",
+			"type": "string"
+		},
+		{
+			"key": "tournament_id",
+			"value": "48a9ab90-1276-11ed-861d-0242ac120002",
+			"type": "string"
+		},
+		{
+			"key": "user_id2",
+			"value": "rh3e4w69-1be9-4f11-a690-1f6940bb54dd",
+			"type": "string"
+		}
+	]
+}

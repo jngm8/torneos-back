@@ -1,0 +1,823 @@
+{
+	"info": {
+		"_postman_id": "c5646a32-38d3-4b37-87a6-edd212e638af",
+		"name": "Organizers-Tournaments",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31735595"
+	},
+	"item": [
+		{
+			"name": "Add a tournament to an organizer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"{{organizer_id}}",
+						"tournaments",
+						"{{tournament_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add a tournament to an organizer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"{{organizer_id}}",
+								"tournaments",
+								"{{tournament_id}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"id\": \"7f1f43fa-2acc-4298-85c0-90e1649f9b6c\"\r\n    \"company\": \"TFC Open\",\r\n    \"email\": \"tfcopen@gmail.com\",\r\n    \"phone\": \"3187433725\",\r\n    \"password\": \"tfcopen\",\r\n    \"location\": \"Bogotá, Colombia\",\r\n    \"webpage\":\"tfcopen.com\",\r\n    \"tournaments\":[\r\n        {\r\n            \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\r\n            \"name\": \"TFC Open\",\r\n            \"address\" : \"La Verdieri Club\",\r\n            \"start_date\": \"2024-04-01\",\r\n            \"end_date\": \"2024-04-05\",\r\n            \"athletes\": \r\n                [\r\n                        {\r\n                            \"username\": \"Carlos\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                            ]\r\n                        },\r\n                        {\r\n                            \"username\": \"Andres\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                                ]\r\n                        },\r\n                ]\r\n        }\r\n    ]\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Add an invalid tournament to an organizer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"{{organizer_id}}",
+						"tournaments",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add an invalid tournament to an organizer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"{{organizer_id}}",
+								"tournaments",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The tournament with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Add a tournament to an invalid organizer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"00000000-0000-0000-0000-000000000000",
+						"tournaments",
+						"{{tournament_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add a tournament to an invalid organizer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"00000000-0000-0000-0000-000000000000",
+								"tournaments",
+								"{{tournament_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The organizer with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Get a tournament from an organizer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"{{organizer_id}}",
+						"tournaments",
+						"{{tournament_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get a tournament from an organizer",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"{{organizer_id}}",
+								"tournaments",
+								"{{tournament_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"id\":\"7f1f43fa-2acc-4298-85c0-90e1649f9b6c\",\r\n    \"name\": \"TFC Open Tennis Tour\",\r\n    \"address\" : \"La Verdieri Club\",\r\n    \"start_date\": \"2024-04-01\",\r\n    \"end_date\": \"2024-04-05\",\r\n    \"athletes\": \r\n    [\r\n            {\r\n                \"username\": \"Carlos\",\r\n                \"roles\": [\r\n                    \"user\"\r\n                ]\r\n            },\r\n            {\r\n                \"username\": \"Andres\",\r\n                \"roles\": [\r\n                    \"user\"\r\n                    ]\r\n            },\r\n    ]\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Get an invalid tournament from an organizer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"{{organizer_id}}",
+						"tournaments",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get an invalid tournament from an organizer",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"{{organizer_id}}",
+								"tournaments",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The tournament with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Get a tournament from an invalid organizer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"00000000-0000-0000-0000-000000000000",
+						"tournaments",
+						"{{tournament_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get a tournament from an invalid organizer",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"00000000-0000-0000-0000-000000000000",
+								"tournaments",
+								"{{tournament_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The organizer with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Get a tournament not associated to an organizer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id2}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"{{organizer_id}}",
+						"tournaments",
+						"{{tournament_id2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get a tournament not associated to an organizer",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id2}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"{{organizer_id}}",
+								"tournaments",
+								"{{tournament_id2}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 412,\r\n   \"message\": \"The tournament with the given id is not associated to the organizer\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all tournaments from the organizer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"{{organizer_id}}",
+						"tournaments"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all tournaments from the organizer",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"{{organizer_id}}",
+								"tournaments"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "[\r\n        {\r\n            \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\r\n            \"name\": \"TFC Open\",\r\n            \"address\" : \"La Verdieri Club\",\r\n            \"date\":\"24/02/2024\"\r\n        }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Get tournaments from an invalid organizer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"00000000-0000-0000-0000-000000000000",
+						"tournaments"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get tournaments from an invalid organizer",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"00000000-0000-0000-0000-000000000000",
+								"tournaments"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The organizer with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Update tournaments from an organizer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n   {\r\n       \"id\": \"{{tournament_id2}}\"\r\n   }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"{{organizer_id}}",
+						"tournaments"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update tournaments from an organizer",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"{{organizer_id}}",
+								"tournaments"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "    {\r\n        \"id\": \"7f1f43fa-2acc-4298-85c0-90e1649f9b6c\",\r\n        \"company\": \"TFC Open\",\r\n        \"email\": \"tfcopen@gmail.com\",\r\n        \"phone\": \"3187433725\",\r\n        \"password\": \"tfcopen\",\r\n        \"location\": \"Bogotá, Colombia\",\r\n        \"webpage\":\"tfcopen.com\",\r\n        \"roles\":[\"user\",\"organizer\"],\r\n        \"tournaments\":\r\n        [\r\n            {\r\n                \"name\": \"TFC Open Tennis Tour\",\r\n                \"address\" : \"La Verdieri Club\",\r\n                \"start_date\": \"2024-04-01\",\r\n                \"end_date\": \"2024-04-05\",\r\n                \"athletes\": \r\n                [\r\n                        {\r\n                            \"username\": \"Carlos\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                            ]\r\n                        },\r\n                        {\r\n                            \"username\": \"Andres\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                                ]\r\n                        },\r\n                ]\r\n            },\r\n            {\r\n                \"id\": \"58a9ab90-1276-11ed-861d-0242ac120002\",\r\n                \"name\": \"Golf Cup\",\r\n                \"address\" : \"Briceño Club\",\r\n                \"start_date\": \"2025-04-01\",\r\n                \"end_date\": \"2025-04-05\",\r\n                \"athletes\": \r\n                    [\r\n                        {\r\n                            \"username\": \"Carlos\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                            ]\r\n                        },\r\n                        {\r\n                            \"username\": \"Andres\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                                ]\r\n                        },\r\n                    ]\r\n            }\r\n        ]\r\n    }"
+				}
+			]
+		},
+		{
+			"name": "Update  invalid tournaments from an organizer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n   {\r\n       \"id\": \"00000000-0000-0000-0000-000000000000\"\r\n   }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"{{organizer_id}}",
+						"tournaments"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update  invalid tournaments from an organizer",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n   {\r\n       \"id\": \"00000000-0000-0000-0000-000000000000\"\r\n   }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"{{organizer_id}}",
+								"tournaments"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The tournament with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Update the tournaments from an invalid organizer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n   {\r\n       \"id\": \"{{tournament_id2}}\"\r\n   }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"00000000-0000-0000-0000-000000000000",
+						"tournaments"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update the tournaments from an invalid organizer",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n   {\r\n       \"id\": \"{{tournament_id2}}\"\r\n   }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"00000000-0000-0000-0000-000000000000",
+								"tournaments"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The organizer with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete a tournament form an organizer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"{{organizer_id}}",
+						"tournaments",
+						"{{tournament_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete a tournament from an organizer",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"{{organizer_id}}",
+								"tournaments",
+								"{{tournament_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete a tournament form an invalid organizer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"00000000-0000-0000-0000-000000000000",
+						"tournaments",
+						"{{tournament_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete a tournament form an invalid organizer",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"00000000-0000-0000-0000-000000000000",
+								"tournaments",
+								"{{tournament_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The organizer with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete an invalid tournament from an organizer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"{{organizer_id}}",
+						"tournaments",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an invalid tournament from an organizer",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"{{organizer_id}}",
+								"tournaments",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The tournament with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete a tournament not associated with an organizer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"organizers",
+						"{{organizer_id}}",
+						"tournaments",
+						"{{tournament_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete a tournament not associated with an organizer",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"organizers",
+								"{{organizer_id}}",
+								"tournaments",
+								"{{tournament_id}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 412,\r\n   \"message\": \"The tournament with the given id is not associated to the organizer\"\r\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3001",
+			"type": "string"
+		},
+		{
+			"key": "tournament_id",
+			"value": "48a9ab90-1276-11ed-861d-0242ac120002",
+			"type": "string"
+		},
+		{
+			"key": "organizer_id",
+			"value": "7f1f43fa-2acc-4298-85c0-90e1649f9b6c",
+			"type": "string"
+		},
+		{
+			"key": "tournament_id2",
+			"value": "58a9ab90-1276-11ed-861d-0242ac120002",
+			"type": "string"
+		}
+	]
+}
