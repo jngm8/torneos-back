@@ -3,6 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { OrganizerModule } from './organizer/organizer.module';
+import { RoleModule } from './role/role.module';
+import { TournamentUserModule } from './tournament-user/tournament-user.module';
+import { TournamentModule } from './tournament/tournament.module';
 
 
 @Module({
@@ -20,6 +23,9 @@ import { OrganizerModule } from './organizer/organizer.module';
     AuthModule,
     UserModule,
     OrganizerModule,
+    RoleModule,
+    TournamentUserModule,
+    TournamentModule,
   ],
   controllers: [],
   providers: [],
