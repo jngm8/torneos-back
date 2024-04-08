@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Role } from '../common/enum/role.enum';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Role } from '../shared/security/enums/role.enum';
+import { TournamentUserEntity } from 'src/tournament-user/tournament-user.entity';
 
 @Entity()
 export class UserEntity{
@@ -14,4 +15,8 @@ export class UserEntity{
 
   @Column({type:'enum', default: Role.USER, enum: Role})
   roles: Role[];
+
+  //OneToMany relation between tournament and user (ManyToMany relation) || A tournament has an specific user
+  @OneToMany(() => TournamentUserEntity, (tournament) => tournament.user)
+  tournaments: TournamentUserEntity[];
 }
