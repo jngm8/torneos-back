@@ -6,6 +6,9 @@ import { OrganizerModule } from './organizer/organizer.module';
 import { RolesModule } from './roles/roles.module';
 import { TournamentUserModule } from './tournament-user/tournament-user.module';
 import { TournamentModule } from './tournament/tournament.module';
+import { OrganizerTournamentModule } from './organizer-tournament/organizer-tournament.module';
+import { UserTournamentModule } from './user-tournament/user-tournament.module';
+import { OrganizerRolesModule } from './organizer-roles/organizer-roles.module';
 
 
 @Module({
@@ -26,6 +29,9 @@ import { TournamentModule } from './tournament/tournament.module';
     RolesModule,
     TournamentUserModule,
     TournamentModule,
+    OrganizerTournamentModule,
+    UserTournamentModule,
+    OrganizerRolesModule,
   ],
   controllers: [],
   providers: [],
