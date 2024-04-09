@@ -1,5 +1,5 @@
-import { RolesEntity } from "src/roles/roles.entity";
-import { TournamentEntity } from "src/tournament/tournament.entity";
+import { RolesEntity } from "../roles/roles.entity";
+import { TournamentEntity } from "../tournament/tournament.entity";
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

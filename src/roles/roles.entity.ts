@@ -1,4 +1,4 @@
-import { OrganizerEntity } from "src/organizer/organizer.entity";
+import { OrganizerEntity } from "../organizer/organizer.entity";
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

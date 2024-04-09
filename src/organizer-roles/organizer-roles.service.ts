@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { OrganizerEntity } from 'src/organizer/organizer.entity';
-import { RolesEntity } from 'src/roles/roles.entity';
-import { BusinessError, BusinessLogicException } from 'src/shared/security/errors/business-errors';
+import { OrganizerEntity } from "../organizer/organizer.entity";
+import { RolesEntity } from "../roles/roles.entity";
+import { BusinessError, BusinessLogicException } from '../shared/security/errors/business-errors';
 import { Repository } from 'typeorm';
 
 @Injectable()

@@ -18,7 +18,7 @@ export class AuthService {
     ) {}
 
     findOneByUsernameWithPassword(username: string): Promise<UserEntity> {
-        return this.userRepository.findOne({ where: { username }, select: ['username','roles','password'] });
+        return this.userRepository.findOne({ where: { username }, select: ['username','role','password'] });
     }
 
    async signUp(authUserDto:AuthUserDto) : Promise<void> {
@@ -43,17 +43,17 @@ export class AuthService {
 
    }
 
-   async signIn(authUserDto:AuthUserDto) : Promise<{accessToken:string, roles: Role[],user}> {
+   async signIn(authUserDto:AuthUserDto) : Promise<{accessToken:string, role: Role,user}> {
     const { username, password } = authUserDto;
     
     const user = await this.findOneByUsernameWithPassword(username);
 
     if ((user) && (await bcrypt.compare(password, user.password))) {
-        const payload: JwtPayload = { username, roles: user.roles}
+        const payload: JwtPayload = { username, role: user.role}
 
         const accessToken: string = await this.jwtService.sign(payload);
 
-        return { accessToken, roles: user.roles,user: user.username};
+        return { accessToken, role: user.role,user: user.username};
     } else {
         throw new UnauthorizedException("Please check your credentials")
     }
