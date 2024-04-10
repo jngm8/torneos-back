@@ -20,7 +20,7 @@ export class RoleService {
     async findOne(id: string): Promise<RolesEntity> {
         const roles : RolesEntity = await this.rolesRepository.findOne({where: {id}, relations: ["organizers"]})
         if (!roles) 
-            throw new BusinessLogicException("The role with the givne id was not found", BusinessError.NOT_FOUND);
+            throw new BusinessLogicException("The role with the given id was not found", BusinessError.NOT_FOUND);
         return roles;
     }
 

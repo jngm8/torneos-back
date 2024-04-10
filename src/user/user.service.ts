@@ -19,7 +19,7 @@ export class UserService {
     async findOne(id: string) : Promise<UserEntity> {
         const user : UserEntity = await this.userRepository.findOne({where: {id}, relations: ["tournaments"]})
         if(!user)
-            throw new BusinessLogicException("The user with the id was not found", BusinessError.NOT_FOUND);
+            throw new BusinessLogicException("The user with the given id was not found", BusinessError.NOT_FOUND);
         return user;
     }
 
@@ -37,7 +37,7 @@ export class UserService {
     async delete(id: string) {
         const user : UserEntity = await this.userRepository.findOne({where: {id}});
         if (!user)
-            throw new BusinessLogicException("The user woth the given id was not found", BusinessError.NOT_FOUND);
+            throw new BusinessLogicException("The user with the given id was not found", BusinessError.NOT_FOUND);
         return await this.userRepository.remove(user);
     }
 

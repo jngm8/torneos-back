@@ -13,11 +13,11 @@ export class TournamentService {
     ){}
 
    async findAll(): Promise<TournamentEntity[]> {
-    return await this.tournamentRepository.find({relations: ["organizers", "users"]})
+    return await this.tournamentRepository.find({relations: ["organizer", "users"]})
    }
 
    async findOne(id: string) : Promise<TournamentEntity> {
-    const tournament : TournamentEntity = await this.tournamentRepository.findOne({where: {id}, relations: ["users","organizers"]})
+    const tournament : TournamentEntity = await this.tournamentRepository.findOne({where: {id}, relations: ["users","organizer"]})
     if(!tournament) 
         throw new BusinessLogicException("The tournament with the given id was not found", BusinessError.NOT_FOUND);
     return tournament;

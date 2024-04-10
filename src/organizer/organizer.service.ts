@@ -34,7 +34,7 @@ export class OrganizerService {
         const persistedOrganizer : OrganizerEntity = await this.organizerRepository.findOne({where: {id}});
         if (!persistedOrganizer)
             throw new BusinessLogicException("The organizer with the given id was not found", BusinessError.NOT_FOUND);
-        return await this.organizerRepository.save({...persistedOrganizer, organizer});
+        return await this.organizerRepository.save({...persistedOrganizer, ...organizer});
     }
 
     async delete(id: string) {

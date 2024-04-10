@@ -22,9 +22,6 @@ describe('TournamentService', () => {
     await seedDataBase();
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
 
   const seedDataBase = async () => {
     repository.clear();
@@ -34,10 +31,89 @@ describe('TournamentService', () => {
         name: faker.person.firstName(),
         date: faker.date.recent().toString(),
         address: faker.location.street(),
-        image: faker.image.url(),
-        users: [],
+        image: faker.image.url()
       });
       tournamentList.push(tournament);
     }
   }
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+
+  it('should return all tournaments', async () => {
+    const tournaments : TournamentEntity[] = await service.findAll();
+    expect(tournaments).not.toBeNull();
+    expect(tournaments).toHaveLength(tournamentList.length);
+  });
+
+  it('should return a tournament by id', async () => {
+    const storedTournament : TournamentEntity = tournamentList[0];
+    const tournament : TournamentEntity = await service.findOne(storedTournament.id);
+    expect(tournament).not.toBeNull();
+    expect(tournament.name).toEqual(storedTournament.name);
+    expect(tournament.date).toEqual(storedTournament.date);
+    expect(tournament.address).toEqual(storedTournament.address);
+
+  });
+
+  it('should return an exception when the tournament does not exist', async () => {
+    await expect(() => service.findOne("0")).rejects.toHaveProperty("message", "The tournament with the given id was not found")
+  });
+
+  it('create should return a new tournament', async () => {
+    const tournament = {
+      id: "1",
+      name: faker.person.firstName(),
+      date: faker.date.recent().toString(),
+      address: faker.location.street(),
+      image: faker.image.url(),
+      organizer: null,
+      users: []
+    }
+
+    const newTournament = await service.create(tournament);
+    expect(newTournament).not.toBeNull();
+    expect(newTournament.name).toEqual(tournament.name);
+    expect(newTournament.date).toEqual(tournament.date);
+    expect(newTournament.address).toEqual(tournament.address);
+    expect(newTournament.image).toEqual(tournament.image);
+  });
+
+  it('shouil update a tournament', async () => {
+    const tournament : TournamentEntity = tournamentList[0];
+    tournament.name = "new name";
+    tournament.address = "new address";
+    const updatedTournament : TournamentEntity = await service.update(tournament.id, tournament);
+    expect(updatedTournament).not.toBeNull();
+    const storedTournament : TournamentEntity = await repository.findOne({where: {id: tournament.id}});
+    expect(storedTournament.name).toEqual(tournament.name);
+    expect(storedTournament.address).toEqual(tournament.address);
+
+  });
+
+  it('update should return an exception when the tournament does not exist', async () => {
+    let tournament : TournamentEntity = tournamentList[0];
+
+    tournament = {
+      ...tournament,
+      name: "new name",
+      address: "new address"
+    }
+
+    await expect(() => service.update("0", tournament)).rejects.toHaveProperty("message", "The tournament with the given id was not found");
+  });
+
+  it('should delete a tournament', async () => {
+    const tournament : TournamentEntity = tournamentList[0];
+    await service.delete(tournament.id);
+    const storedTournament : TournamentEntity = await repository.findOne({where: {id: tournament.id}});
+    expect(storedTournament).toBeNull();
+  });
+
+  it('should return an exception when the tournament does not exist', async () => {
+    await expect(() => service.delete("0")).rejects.toHaveProperty("message", "The tournament with the given id was not found");
+  });
+
+
 });
