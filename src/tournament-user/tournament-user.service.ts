@@ -25,6 +25,8 @@ export class TournamentUserService {
         if(!tournament)
             throw new BusinessLogicException("The tournament with the given id was not found", BusinessError.NOT_FOUND);
 
+        if(!user.tournaments)
+            user.tournaments = []
         
         user.tournaments = [...user.tournaments, tournament]
 
@@ -34,7 +36,7 @@ export class TournamentUserService {
 
     async findTournamentFromUser(idUser: string, idTournament: string) : Promise<TournamentUserEntity> {
 
-        const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}});
+        const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}, relations: ["tournaments"]});
         if(!user)
             throw new BusinessLogicException("The user with the given id was not found", BusinessError.NOT_FOUND);
 
@@ -42,9 +44,10 @@ export class TournamentUserService {
         if(!tournament)
             throw new BusinessLogicException("The tournament with the given id was not found", BusinessError.NOT_FOUND);
 
-        const userTournament : TournamentUserEntity = user.tournaments.find( tour => tour.id = tournament.id)
+
+        const userTournament : TournamentUserEntity = user.tournaments.find( tour => tour.id === tournament.id)
         if (!userTournament)
-            throw new BusinessLogicException("THe tournament does not exist for the given user", BusinessError.PRECONDITION_FAILED);
+            throw new BusinessLogicException("The tournament with the given id was not found", BusinessError.PRECONDITION_FAILED);
 
         return userTournament;
     }
@@ -74,7 +77,7 @@ export class TournamentUserService {
     }
 
     async deleteTournamentFromUser(idUser: string, idTournament: string) {
-        const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}});
+        const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}, relations: ["tournaments"]});
         if(!user)
             throw new BusinessLogicException("The user with the given id was not found", BusinessError.NOT_FOUND);
 
@@ -82,9 +85,9 @@ export class TournamentUserService {
         if(!tournament)
             throw new BusinessLogicException("The tournament with the given id was not found", BusinessError.NOT_FOUND);
 
-        const userTournament : TournamentUserEntity = user.tournaments.find( tour => tour.id = tournament.id)
+        const userTournament : TournamentUserEntity = user.tournaments.find( tour => tour.id === tournament.id)
         if (!userTournament)
-            throw new BusinessLogicException("THe tournament does not exist for the given user", BusinessError.PRECONDITION_FAILED);
+            throw new BusinessLogicException("The tournament does not exist for the given user", BusinessError.PRECONDITION_FAILED);
 
         user.tournaments = user.tournaments.filter( tour => tour.id !== idTournament);
 

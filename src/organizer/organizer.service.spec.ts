@@ -28,7 +28,7 @@ describe('OrganizerService', () => {
     organizerList = []
     for(let i = 0; i < 5; i++) {
       const organizer : OrganizerEntity = await repository.save({
-        company: faker.person.firstName(),
+        company: faker.company.name(),
         email: faker.internet.email(),
         password: faker.internet.password(),
         location: faker.location.direction(),
@@ -67,7 +67,7 @@ describe('OrganizerService', () => {
   it('create should return a new organizer', async () => {
     const organizer = {
       id: "1",
-      company: faker.person.firstName(),
+      company: faker.company.name(),
       email: faker.internet.email(),
       password: faker.internet.password(),
       location: faker.location.direction(),

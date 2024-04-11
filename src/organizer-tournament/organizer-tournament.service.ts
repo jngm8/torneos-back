@@ -18,7 +18,7 @@ export class OrganizerTournamentService {
     ){}
 
 
-    async addTournamentToOrganizer(idTournament: string, idOrganizer: string): Promise<OrganizerEntity> {
+    async addTournamentToOrganizer(idOrganizer: string,idTournament: string, ): Promise<OrganizerEntity> {
         
         const organizer : OrganizerEntity = await this.organizerRepository.findOne({where: {id: idOrganizer}});
         if(!organizer)
@@ -28,12 +28,15 @@ export class OrganizerTournamentService {
         if (!tournament)
             throw new BusinessLogicException("The tournament with the given id was not found", BusinessError.NOT_FOUND);
 
+        if (!organizer.tournaments)
+            organizer.tournaments = []
+
         organizer.tournaments = [...organizer.tournaments, tournament]
 
         return await this.organizerRepository.save(organizer)
     }
 
-    async findTournamentFromOrganizer(idTournament: string, idOrganizer: string): Promise<TournamentEntity> {
+    async findTournamentFromOrganizer(idOrganizer: string, idTournament: string): Promise<TournamentEntity> {
         const organizer : OrganizerEntity = await this.organizerRepository.findOne({where: {id: idOrganizer}, relations: ["tournaments","roles"]});
         if(!organizer)
             throw new BusinessLogicException("The organizer with the given id was not found", BusinessError.NOT_FOUND);
@@ -77,7 +80,7 @@ export class OrganizerTournamentService {
     }
 
     async deleteTournamentFromOrganizer(idOrganizer: string, idTournament: string) {
-        const organizer : OrganizerEntity = await this.organizerRepository.findOne({where: {id: idOrganizer}});
+        const organizer : OrganizerEntity = await this.organizerRepository.findOne({where: {id: idOrganizer}, relations: ["tournaments","roles"]});
         if(!organizer)
             throw new BusinessLogicException("The organizer with the given id was not found", BusinessError.NOT_FOUND);
 
