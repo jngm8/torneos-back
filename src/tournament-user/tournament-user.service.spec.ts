@@ -5,8 +5,8 @@ import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { TournamentUserEntity } from './tournament-user.entity';
 import { faker } from '@faker-js/faker';
-import { Role } from '../shared/security/enums/role.enum';
-import { TypeOrmTestingConfig } from '../shared/security/testing-utils/typeorm-testing-config';
+import { Role } from '../shared/enums/role.enum';
+import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 
 describe('TournamentUserService', () => {
   let service: TournamentUserService;

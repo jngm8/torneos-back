@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './user.entity';
 import { Repository } from 'typeorm';
-import { BusinessError, BusinessLogicException } from '../shared/security/errors/business-errors';
+import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 
 @Injectable()
 export class UserService {

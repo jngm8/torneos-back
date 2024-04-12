@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '../user/user.entity';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import constants from '../shared/security/constants';
+import constants from '../shared/constants';
 import { JwtStrategy } from './jwt-strategy';
 
 @Module({

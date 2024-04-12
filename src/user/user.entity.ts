@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Role } from '../shared/security/enums/role.enum';
+import { Role } from '../shared/enums/role.enum';
 import { TournamentUserEntity } from '../tournament-user/tournament-user.entity';
 
 @Entity()

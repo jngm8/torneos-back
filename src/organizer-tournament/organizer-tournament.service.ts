@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { OrganizerEntity } from '../organizer/organizer.entity';
-import { BusinessError, BusinessLogicException } from '../shared/security/errors/business-errors';
+import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 import { TournamentEntity } from '../tournament/tournament.entity';
 import { Repository } from 'typeorm';
 

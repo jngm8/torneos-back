@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { OrganizerTournamentService } from './organizer-tournament.service';
-import { TypeOrmTestingConfig } from '../shared/security/testing-utils/typeorm-testing-config';
+import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { Repository } from 'typeorm';
 import { OrganizerEntity } from '../organizer/organizer.entity';
 import { TournamentEntity } from '../tournament/tournament.entity';

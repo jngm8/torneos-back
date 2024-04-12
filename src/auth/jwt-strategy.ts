@@ -5,7 +5,7 @@ import { Repository } from "typeorm";
 import { UserEntity } from "../user/user.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
-import constants from "src/shared/security/constants";
+import constants from "src/shared/constants";
 import { JwtPayload } from "./interfaces/jwt-payload.interface";
 
 @Injectable()

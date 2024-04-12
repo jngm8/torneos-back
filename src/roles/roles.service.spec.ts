@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { RoleService } from './roles.service';
-import { TypeOrmTestingConfig } from '../shared/security/testing-utils/typeorm-testing-config';
+import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RolesEntity } from './roles.entity';

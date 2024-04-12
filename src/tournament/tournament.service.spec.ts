@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TournamentService } from './tournament.service';
-import { TypeOrmTestingConfig } from '../shared/security/testing-utils/typeorm-testing-config';
+import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { Repository } from 'typeorm';
 import { TournamentEntity } from './tournament.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';

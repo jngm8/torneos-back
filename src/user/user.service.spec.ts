@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from './user.service';
-import { TypeOrmTestingConfig } from '../shared/security/testing-utils/typeorm-testing-config';
+import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { UserEntity } from './user.entity';
 import { Repository } from 'typeorm';
 import { faker } from '@faker-js/faker';
-import { Role } from '../shared/security/enums/role.enum';
+import { Role } from '../shared/enums/role.enum';
 
 
 describe('UserService', () => {

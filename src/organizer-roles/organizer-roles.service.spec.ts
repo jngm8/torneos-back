@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { OrganizerRolesService } from './organizer-roles.service';
 import { RolesEntity } from '../roles/roles.entity';
-import { TypeOrmTestingConfig } from '../shared/security/testing-utils/typeorm-testing-config';
+import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { Repository } from 'typeorm';
 import { OrganizerEntity } from '../organizer/organizer.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';

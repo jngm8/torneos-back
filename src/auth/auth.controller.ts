@@ -2,7 +2,7 @@ import { Controller, Get, Req } from '@nestjs/common';
 import { AuthUserDto } from './dto/auth-user.dto';
 import { Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { Role } from '../shared/security/enums/role.enum';
+import { Role } from '../shared/enums/role.enum';
 import { Auth } from './decorators/auth.decorator';
 import RequestUser from './interfaces/request-user.interface';
 
@@ -21,7 +21,7 @@ export class AuthController {
     }
 
     @Post('signin')
-    signin(@Body() authUserDto:AuthUserDto): Promise<{accessToken: string,roles: Role[],user}> {
+    signin(@Body() authUserDto:AuthUserDto): Promise<{accessToken: string, role: Role,user}> {
         return this.authService.signIn(authUserDto);
     }
 
