@@ -1,11 +1,11 @@
-import { Body, Controller, Get, Param, Post, Put, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
 import { TournamentService } from './tournament.service';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors/business-errors.interceptor';
 import { TournamentEntity } from './tournament.entity';
 import { TournamentDto } from './tournament.dto/tournament.dto';
 import { plainToInstance } from 'class-transformer';
 
-@Controller('tournament')
+@Controller('tournaments')
 @UseInterceptors(BusinessErrorsInterceptor)
 export class TournamentController {
 
@@ -29,12 +29,19 @@ export class TournamentController {
         return this.tournamentService.create(tournament);
     }
 
-    @Put('tournamentId')
-    update(@Param('idTournament') idTournament: string, @Body() tournamentDto: TournamentDto ) : Promise<TournamentEntity> {
+    @Put(':tournamentId')
+    update(@Param('tournamentId') tournamentId: string, @Body() tournamentDto: TournamentDto ) : Promise<TournamentEntity> {
         const tournament : TournamentEntity = plainToInstance(TournamentEntity, tournamentDto);
 
-        return this.tournamentService.update(idTournament, tournament);
+        return this.tournamentService.update(tournamentId, tournament);
     }
+
+    @Delete(':tournamentId')
+    @HttpCode(204)
+    delete(@Param('tournamentId') userId: string){
+        return this.tournamentService.delete(userId);
+    }
+
 
 
 

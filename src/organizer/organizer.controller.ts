@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
 import { OrganizerService } from './organizer.service';
 import { OrganizerEntity } from './organizer.entity';
 import { OrganizerDto } from './organizer.dto/organizer.dto';
@@ -16,7 +16,7 @@ export class OrganizerController {
         return this.organizerService.findAll();
     }
 
-    @Get('organizerId')
+    @Get(':organizerId')
     findOne(@Param('organizerId') organizerId: string): Promise<OrganizerEntity> {
         return this.organizerService.findOne(organizerId);
     }
@@ -25,5 +25,17 @@ export class OrganizerController {
     create(@Body() organizerDto: OrganizerDto) {
         const organizer : OrganizerEntity = plainToInstance(OrganizerEntity, organizerDto);
         return this.organizerService.create(organizer);
+    }
+
+    @Put(':organizerId')
+    update(@Param() organizerId: string, @Body() organizerDto: OrganizerDto): Promise<OrganizerEntity> {
+        const organizer : OrganizerEntity = plainToInstance(OrganizerEntity, organizerDto)
+        return this.organizerService.update(organizerId,organizer)
+    }
+
+    @Delete(':organizerId')
+    @HttpCode(204)
+    delete(@Param('organizerId') organizerId: string) {
+        return this.organizerService.delete(organizerId);
     }
 }

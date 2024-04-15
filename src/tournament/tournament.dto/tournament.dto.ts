@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsUrl } from "class-validator";
+import { IsNotEmpty, IsString } from "class-validator";
 
 export class TournamentDto {
 
@@ -15,6 +15,6 @@ export class TournamentDto {
     readonly date: string;
 
     @IsNotEmpty()
-    @IsUrl()
+    @IsString()
     readonly image: string;
 }

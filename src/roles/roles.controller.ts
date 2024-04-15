@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
 import { RoleService } from './roles.service';
 import { RolesEntity } from './roles.entity';
 import { RolesDto } from './roles.dto/roles.dto';
@@ -16,7 +16,7 @@ export class RolesController {
         return this.rolesService.findAll();
     }
 
-    @Get('roleId')
+    @Get(':roleId')
     findOne(@Param('roleId') roleId: string): Promise<RolesEntity> {
         return this.rolesService.findOne(roleId);
     }
@@ -25,5 +25,17 @@ export class RolesController {
     create(@Body() roleDto: RolesDto) {
         const role: RolesEntity = plainToInstance(RolesEntity, roleDto);
         return this.rolesService.create(role);
+    }
+
+    @Put(':roleId')
+    update(@Param('roleId') roleId: string, @Body() roleDto: RolesDto): Promise<RolesEntity> {
+        const role : RolesEntity = plainToInstance(RolesEntity, roleDto);
+        return this.rolesService.update(roleId,role);
+    }
+
+    @Delete(':roleId')
+    @HttpCode(204)
+    delete(@Param('roleId') roleId: string) {
+        return this.rolesService.delete(roleId);
     }
 }
