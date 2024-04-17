@@ -4,6 +4,7 @@ import { UserEntity } from '../user/user.entity';
 import { Repository } from 'typeorm';
 import { TournamentUserEntity } from './tournament-user.entity';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
+import { TournamentEntity } from 'src/tournament/tournament.entity';
 
 @Injectable()
 export class TournamentUserService {
@@ -11,87 +12,109 @@ export class TournamentUserService {
     constructor(
         @InjectRepository(UserEntity)
         private readonly userRepository : Repository<UserEntity>,
+        @InjectRepository(TournamentEntity)
+        private readonly tournamentRepository : Repository<TournamentEntity>,
         @InjectRepository(TournamentUserEntity)
-        private readonly tournamentUserRepository : Repository<TournamentUserEntity>
+        private readonly tournamentUserRepository : Repository<TournamentUserEntity>,
+
     ){}
 
-    async addTournamentToUser(idUser: string, idTournament: string): Promise<UserEntity> {
+    async addTournamentToUser(idUser: string, idTournament: string, category: string): Promise<TournamentUserEntity> {
 
-        const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}});
+        const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}, relations: ["tournaments", "tournaments.tournament"]});
         if(!user)
             throw new BusinessLogicException("The user with the given id was not found", BusinessError.NOT_FOUND);
 
-        const tournament : TournamentUserEntity = await this.tournamentUserRepository.findOne({where: {id: idTournament}});
+        const tournament : TournamentEntity = await this.tournamentRepository.findOne({where: {id: idTournament}});
         if(!tournament)
             throw new BusinessLogicException("The tournament with the given id was not found", BusinessError.NOT_FOUND);
 
         if(!user.tournaments)
             user.tournaments = []
         
-        user.tournaments = [...user.tournaments, tournament]
+        const tournamentUser : TournamentUserEntity = new TournamentUserEntity();
 
-        return await this.userRepository.save(user)
+        tournamentUser.category = category;
+        tournamentUser.tournament = tournament;
+        tournamentUser.user = user;
+
+        return await this.tournamentUserRepository.save(tournamentUser);
 
     }
 
-    async findTournamentFromUser(idUser: string, idTournament: string) : Promise<TournamentUserEntity> {
+    async findTournamentFromUser(idUser: string, idTournament: string) : Promise<TournamentEntity> {
 
-        const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}, relations: ["tournaments"]});
+        const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}, relations: ["tournaments", "tournaments.tournament", "tournaments.user"]});
         if(!user)
             throw new BusinessLogicException("The user with the given id was not found", BusinessError.NOT_FOUND);
 
-        const tournament : TournamentUserEntity = await this.tournamentUserRepository.findOne({where: {id: idTournament}});
+        const tournament : TournamentEntity = await this.tournamentRepository.findOne({where: {id: idTournament}});
         if(!tournament)
             throw new BusinessLogicException("The tournament with the given id was not found", BusinessError.NOT_FOUND);
-
-
-        const userTournament : TournamentUserEntity = user.tournaments.find( tour => tour.id === tournament.id)
+        
+        const userTournament : TournamentUserEntity = user.tournaments.find( tour => tour.tournament.id === tournament.id)
         if (!userTournament)
-            throw new BusinessLogicException("The tournament with the given id was not found", BusinessError.PRECONDITION_FAILED);
+            throw new BusinessLogicException("The tournament with the given id is not associated to the user", BusinessError.PRECONDITION_FAILED);
 
-        return userTournament;
+        return userTournament.tournament;
     }
 
     async findAllTournamentsFromUser(idUser: string) : Promise<TournamentUserEntity[]> {
-        const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}, relations: ["tournaments"]});
+        const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}, relations: ["tournaments", "tournaments.tournament"]});
         if(!user)
             throw new BusinessLogicException("The user with the given id was not found", BusinessError.NOT_FOUND);
 
         return user.tournaments;
     }
 
-    async associateTournamentsToUser(idUser: string, tournaments: TournamentUserEntity[]) : Promise<UserEntity> {
-        const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}, relations: ["tournaments"]});
+    async associateTournamentsToUser(idUser: string, tournaments: TournamentEntity[]) : Promise<{id: string, username: string, role: string, tournaments: TournamentUserEntity[]}> {
+        const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}, relations: ["tournaments", "tournaments.tournament"]});
         if(!user)
             throw new BusinessLogicException("The user with the given id was not found", BusinessError.NOT_FOUND);
-
+        
+        // Verify the existance of the tournaments
         for(let i = 0; i < tournaments.length ; i++) {
-            const tournament : TournamentUserEntity = await this.tournamentUserRepository.findOne({where: {id: tournaments[i].id}})
+            const tournament : TournamentEntity = await this.tournamentRepository.findOne({where: {id: tournaments[i].id}})
             if(!tournament)
-                throw new BusinessLogicException("A tournament from the list of arrays does not exist", BusinessError.NOT_FOUND)
+                throw new BusinessLogicException("A tournament from the list of tournaments does not exist", BusinessError.NOT_FOUND);    
         }
 
-        user.tournaments = tournaments;
+        // Check if the user has already associated tournaments and delete them
+        const userCheck = await this.tournamentUserRepository.find({where: {user: user}});
+        if(userCheck)
+            await this.tournamentUserRepository.delete({user: user});
 
-        return await this.userRepository.save(user);
+        //Associate the new tournaments to the user
+        for(let i = 0; i < tournaments.length; i++) {
+            const tournamentUser : TournamentUserEntity = new TournamentUserEntity();
+            tournamentUser.tournament = tournaments[i];
+            tournamentUser.user = user;
+            tournamentUser.category = "intermidiate";
+            await this.tournamentUserRepository.save(tournamentUser);
+        }
+
+        return {id: user.id, username: user.username, role: user.role, tournaments: user.tournaments};
     }
 
     async deleteTournamentFromUser(idUser: string, idTournament: string) {
-        const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}, relations: ["tournaments"]});
+        const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}, relations: ["tournaments", "tournaments.tournament"]});
         if(!user)
             throw new BusinessLogicException("The user with the given id was not found", BusinessError.NOT_FOUND);
 
-        const tournament : TournamentUserEntity = await this.tournamentUserRepository.findOne({where: {id: idTournament}});
+        const tournament : TournamentEntity = await this.tournamentRepository.findOne({where: {id: idTournament}});
         if(!tournament)
             throw new BusinessLogicException("The tournament with the given id was not found", BusinessError.NOT_FOUND);
-
-        const userTournament : TournamentUserEntity = user.tournaments.find( tour => tour.id === tournament.id)
+        
+        const userTournament : TournamentUserEntity = user.tournaments.find( tour => tour.tournament.id === tournament.id)
         if (!userTournament)
             throw new BusinessLogicException("The tournament does not exist for the given user", BusinessError.PRECONDITION_FAILED);
 
-        user.tournaments = user.tournaments.filter( tour => tour.id !== idTournament);
+        user.tournaments = user.tournaments.filter( tour => tour.tournament.id !== idTournament);
+
+        await this.tournamentUserRepository.delete(userTournament.id);
 
         return await this.userRepository.save(user);
     }
+
 
 }

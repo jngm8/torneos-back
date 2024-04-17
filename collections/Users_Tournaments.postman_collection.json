@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "c5646a32-38d3-4b37-87a6-edd212e638af",
-		"name": "Organizers-Tournaments",
+		"_postman_id": "414f2ac6-8ecf-4723-9750-cdec2da20e3b",
+		"name": "Users_Tournaments",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "31735595"
 	},
 	"item": [
 		{
-			"name": "Add a tournament to an organizer",
+			"name": "Add a tournament to a user",
 			"event": [
 				{
 					"listen": "test",
@@ -25,14 +25,23 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"category\": \"expert\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id}}",
+					"raw": "{{baseURL}}/users/{{user_id}}/tournaments/{{tournament_id}}",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
-						"{{organizer_id}}",
+						"users",
+						"{{user_id}}",
 						"tournaments",
 						"{{tournament_id}}"
 					]
@@ -40,18 +49,18 @@
 			},
 			"response": [
 				{
-					"name": "Add a tournament to an organizer",
+					"name": "Add an tournament to a user",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id}}",
+							"raw": "{{baseURL}}/users/{{user_id}}/tournaments/{{tournament_id}}",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
-								"{{organizer_id}}",
+								"users",
+								"{{user_id}}",
 								"tournaments",
 								"{{tournament_id}}"
 							]
@@ -70,12 +79,12 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"id\": \"70880dc4-91cc-452f-91bc-c7ef93b43e80\",\n    \"company\": \"TFC Open\",\n    \"email\": \"tfcopen@gmail.com\",\n    \"password\": \"tfcopen\",\n    \"phone\": \"3187433725\",\n    \"location\": \"Bogotá, Colombia\",\n    \"webpage\": \"tfcopen.com\",\n    \"tournaments\": [\n        {\n            \"id\": \"036c7600-310b-446f-9cf8-683d49265456\",\n            \"name\": \"TFC Open\",\n            \"date\": \"24/02/2024\",\n            \"address\": \"La Verdieri Club\",\n            \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\"\n        }\n    ]\n}"
+					"body": "{\r\n    \"username\": \"jngm00\",\r\n    \"role\": \"user\",\r\n    \"tournaments\": [\r\n        {\r\n            \"id\": \"2a6a4ca6-109b-489d-aace-8377c503a992\",\r\n            \"name\": \"TurboBet\",\r\n            \"date\": \"23/04/2025\",\r\n            \"address\": \"Cancha Los Heroes\",\r\n            \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\"\r\n        }\r\n    ]\r\n}"
 				}
 			]
 		},
 		{
-			"name": "Add an invalid tournament to an organizer",
+			"name": "Add an invalid tournament to a user",
 			"event": [
 				{
 					"listen": "test",
@@ -99,13 +108,13 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/00000000-0000-0000-0000-000000000000",
+					"raw": "{{baseURL}}/users/{{user_id}}/tournaments/00000000-0000-0000-0000-000000000000",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
-						"{{organizer_id}}",
+						"users",
+						"{{user_id}}",
 						"tournaments",
 						"00000000-0000-0000-0000-000000000000"
 					]
@@ -113,18 +122,18 @@
 			},
 			"response": [
 				{
-					"name": "Add an invalid tournament to an organizer",
+					"name": "Add an invalid user to a tournament",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/00000000-0000-0000-0000-000000000000",
+							"raw": "{{baseURL}}/users/{{user_id}}/tournaments/00000000-0000-0000-0000-000000000000",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
-								"{{organizer_id}}",
+								"users",
+								"{{user_id}}",
 								"tournaments",
 								"00000000-0000-0000-0000-000000000000"
 							]
@@ -148,7 +157,7 @@
 			]
 		},
 		{
-			"name": "Add a tournament to an invalid organizer",
+			"name": "Add a tournament to an invalid user",
 			"event": [
 				{
 					"listen": "test",
@@ -160,7 +169,7 @@
 							"\r",
 							"pm.test(\"Get expected error message\", function () {\r",
 							"   var data = pm.response.json();\r",
-							"   pm.expect(data.message).to.eql(\"The organizer with the given id was not found\");\r",
+							"   pm.expect(data.message).to.eql(\"The user with the given id was not found\");\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -172,12 +181,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
+					"raw": "{{baseURL}}/users/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
+						"users",
 						"00000000-0000-0000-0000-000000000000",
 						"tournaments",
 						"{{tournament_id}}"
@@ -186,17 +195,17 @@
 			},
 			"response": [
 				{
-					"name": "Add a tournament to an invalid organizer",
+					"name": "Add a tournament to an invalid user",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
+							"raw": "{{baseURL}}/users/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
+								"users",
 								"00000000-0000-0000-0000-000000000000",
 								"tournaments",
 								"{{tournament_id}}"
@@ -216,12 +225,12 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The organizer with the given id was not found\"\n}"
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The user with the given id was not found\"\n}"
 				}
 			]
 		},
 		{
-			"name": "Get a tournament from an organizer",
+			"name": "Get a tournament from a user",
 			"event": [
 				{
 					"listen": "test",
@@ -240,13 +249,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id}}",
+					"raw": "{{baseURL}}/users/{{user_id}}/tournaments/{{tournament_id}}",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
-						"{{organizer_id}}",
+						"users",
+						"{{user_id}}",
 						"tournaments",
 						"{{tournament_id}}"
 					]
@@ -254,18 +263,18 @@
 			},
 			"response": [
 				{
-					"name": "Get a tournament from an organizer",
+					"name": "Get an user from a tournament",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id}}",
+							"raw": "{{baseURL}}/users/{{user_id}}/tournaments/{{tournament_id}}",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
-								"{{organizer_id}}",
+								"users",
+								"{{user_id}}",
 								"tournaments",
 								"{{tournament_id}}"
 							]
@@ -284,12 +293,12 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"id\": \"036c7600-310b-446f-9cf8-683d49265456\",\n    \"name\": \"TFC Open\",\n    \"date\": \"24/02/2024\",\n    \"address\": \"La Verdieri Club\",\n    \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\"\n}"
+					"body": "{\r\n    \"id\": \"2a6a4ca6-109b-489d-aace-8377c503a992\",\r\n    \"name\": \"TurboBet\",\r\n    \"date\": \"23/04/2025\",\r\n    \"address\": \"Cancha Los Heroes\",\r\n    \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\"\r\n}"
 				}
 			]
 		},
 		{
-			"name": "Get an invalid tournament from an organizer",
+			"name": "Get an invalid tournament from a user",
 			"event": [
 				{
 					"listen": "test",
@@ -313,13 +322,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/00000000-0000-0000-0000-000000000000",
+					"raw": "{{baseURL}}/users/{{user_id}}/tournaments/00000000-0000-0000-0000-000000000000",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
-						"{{organizer_id}}",
+						"users",
+						"{{user_id}}",
 						"tournaments",
 						"00000000-0000-0000-0000-000000000000"
 					]
@@ -327,25 +336,23 @@
 			},
 			"response": [
 				{
-					"name": "Get an invalid tournament from an organizer",
+					"name": "Get an invalid tournament from a user",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/00000000-0000-0000-0000-000000000000",
+							"raw": "{{baseURL}}/users/{{user_id}}/tournaments/00000000-0000-0000-0000-000000000000",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
-								"{{organizer_id}}",
+								"users",
+								"{{user_id}}",
 								"tournaments",
 								"00000000-0000-0000-0000-000000000000"
 							]
 						}
 					},
-					"status": "Not Found",
-					"code": 404,
 					"_postman_previewlanguage": "json",
 					"header": [
 						{
@@ -362,7 +369,7 @@
 			]
 		},
 		{
-			"name": "Get a tournament from an invalid organizer",
+			"name": "Get a tournament from an invalid user",
 			"event": [
 				{
 					"listen": "test",
@@ -374,7 +381,7 @@
 							"\r",
 							"pm.test(\"Get expected error message\", function () {\r",
 							"   var data = pm.response.json();\r",
-							"   pm.expect(data.message).to.eql(\"The organizer with the given id was not found\");\r",
+							"   pm.expect(data.message).to.eql(\"The user with the given id was not found\");\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -386,12 +393,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
+					"raw": "{{baseURL}}/users/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
+						"users",
 						"00000000-0000-0000-0000-000000000000",
 						"tournaments",
 						"{{tournament_id}}"
@@ -400,25 +407,23 @@
 			},
 			"response": [
 				{
-					"name": "Get a tournament from an invalid organizer",
+					"name": "Get a tournament from an invalid user",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
+							"raw": "{{baseURL}}/users/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
+								"users",
 								"00000000-0000-0000-0000-000000000000",
 								"tournaments",
 								"{{tournament_id}}"
 							]
 						}
 					},
-					"status": "Not Found",
-					"code": 404,
 					"_postman_previewlanguage": "json",
 					"header": [
 						{
@@ -430,12 +435,12 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The organizer with the given id was not found\"\n}"
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The user with the given id was not found\"\n}"
 				}
 			]
 		},
 		{
-			"name": "Get a tournament not associated to an organizer",
+			"name": "Get a tournament not associated to a user",
 			"event": [
 				{
 					"listen": "test",
@@ -447,7 +452,7 @@
 							"\r",
 							"pm.test(\"Get expected error message\", function () {\r",
 							"   var data = pm.response.json();\r",
-							"   pm.expect(data.message).to.eql(\"The tournament with the given id is not associated to the organizer\");\r",
+							"   pm.expect(data.message).to.eql(\"The tournament with the given id is not associated to the user\");\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -459,34 +464,34 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id2}}",
+					"raw": "{{baseURL}}/users/{{user_id}}/tournaments/{{tournaments_id2}}",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
-						"{{organizer_id}}",
+						"users",
+						"{{user_id}}",
 						"tournaments",
-						"{{tournament_id2}}"
+						"{{tournaments_id2}}"
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "Get a tournament not associated to an organizer",
+					"name": "Get a tournament not associated to a user",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id2}}",
+							"raw": "{{baseURL}}/users/{{user_id}}/tournaments/{{tournaments_id2}}",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
-								"{{organizer_id}}",
+								"users",
+								"{{user_id}}",
 								"tournaments",
-								"{{tournament_id2}}"
+								"{{tournaments_id2}}"
 							]
 						}
 					},
@@ -503,12 +508,12 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"The tournament with the given id is not associated to the organizer\"\n}"
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"The tournament with the given id is not associated to the user\"\n}"
 				}
 			]
 		},
 		{
-			"name": "Get all tournaments from the organizer",
+			"name": "Get all tournaments from a user",
 			"event": [
 				{
 					"listen": "test",
@@ -527,32 +532,32 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments",
+					"raw": "{{baseURL}}/users/{{user_id}}/tournaments",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
-						"{{organizer_id}}",
+						"users",
+						"{{user_id}}",
 						"tournaments"
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "Get all tournaments from the organizer",
+					"name": "Get all tournaments from a user",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments",
+							"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
-								"{{organizer_id}}",
-								"tournaments"
+								"tournaments",
+								"{{tournament_id}}",
+								"users"
 							]
 						}
 					},
@@ -569,12 +574,12 @@
 						}
 					],
 					"cookie": [],
-					"body": "[\n    {\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\n        \"name\": \"TFC Open\",\n        \"address\": \"La Verdieri Club\",\n        \"date\": \"24/02/2024\"\n    }\n]"
+					"body": "[\n    {\n        \"id\": \"2cf3518a-eaac-4843-a468-f2ab593ef9e5\",\n        \"category\": \"expert\",\n        \"tournament\": {\n            \"id\": \"036c7600-310b-446f-9cf8-683d49265456\",\n            \"name\": \"TFC Open\",\n            \"date\": \"24/02/2024\",\n            \"address\": \"La Verdieri Club\",\n            \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\"\n        }\n    },\n    {\n        \"id\": \"da5bd9e5-8327-405e-9a62-cee0de2dc0f7\",\n        \"category\": \"expert\",\n        \"tournament\": {\n            \"id\": \"2a6a4ca6-109b-489d-aace-8377c503a992\",\n            \"name\": \"TurboBet\",\n            \"date\": \"23/04/2025\",\n            \"address\": \"Cancha Los Heroes\",\n            \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\"\n        }\n    },\n    {\n        \"id\": \"db2a6b5c-205c-4b82-92b0-7d1bd98f17d2\",\n        \"category\": \"expert\",\n        \"tournament\": {\n            \"id\": \"767d97df-ca52-4a19-830b-a4576c9dc7d5\",\n            \"name\": \"Golf Masters\",\n            \"date\": \"23/04/2025\",\n            \"address\": \"Briceño\",\n            \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\"\n        }\n    }\n]"
 				}
 			]
 		},
 		{
-			"name": "Get tournaments from an invalid organizer",
+			"name": "Get all tournaments from an invalid user",
 			"event": [
 				{
 					"listen": "test",
@@ -586,7 +591,7 @@
 							"\r",
 							"pm.test(\"Get expected error message\", function () {\r",
 							"   var data = pm.response.json();\r",
-							"   pm.expect(data.message).to.eql(\"The organizer with the given id was not found\");\r",
+							"   pm.expect(data.message).to.eql(\"The user with the given id was not found\");\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -598,12 +603,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments",
+					"raw": "{{baseURL}}/users/00000000-0000-0000-0000-000000000000/tournaments",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
+						"users",
 						"00000000-0000-0000-0000-000000000000",
 						"tournaments"
 					]
@@ -611,17 +616,17 @@
 			},
 			"response": [
 				{
-					"name": "Get tournaments from an invalid organizer",
+					"name": "Get all tournaments from an invalid user",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments",
+							"raw": "{{baseURL}}/users/00000000-0000-0000-0000-000000000000/tournaments",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
+								"users",
 								"00000000-0000-0000-0000-000000000000",
 								"tournaments"
 							]
@@ -640,12 +645,12 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The organizer with the given id was not found\"\n}"
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The user with the given id was not found\"\n}"
 				}
 			]
 		},
 		{
-			"name": "Update tournaments from an organizer",
+			"name": "Update tournaments from a user",
 			"event": [
 				{
 					"listen": "test",
@@ -665,7 +670,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "[\r\n   {\r\n       \"id\": \"{{tournament_id2}}\"\r\n   }\r\n]",
+					"raw": "[\r\n   {\r\n       \"id\": \"{{tournament_id}}\"\r\n   },\r\n      {\r\n       \"id\": \"{{tournament_id3}}\"\r\n   },\r\n      {\r\n       \"id\": \"{{tournament_id5}}\"\r\n   }\r\n\r\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -673,31 +678,40 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments",
+					"raw": "{{baseURL}}/users/{{user_id}}/tournaments",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
-						"{{organizer_id}}",
+						"users",
+						"{{user_id}}",
 						"tournaments"
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "Update tournaments from an organizer",
+					"name": "Update tournaments from a user",
 					"originalRequest": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n   {\r\n       \"id\": \"{{user_id2}}\"\r\n   }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments",
+							"raw": "{{baseURL}}/users/{{user_id}}/tournaments",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
-								"{{organizer_id}}",
+								"users",
+								"{{user_id}}",
 								"tournaments"
 							]
 						}
@@ -715,12 +729,12 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"id\": \"70880dc4-91cc-452f-91bc-c7ef93b43e80\",\n    \"company\": \"TFC Open\",\n    \"email\": \"tfcopen@gmail.com\",\n    \"password\": \"tfcopen\",\n    \"phone\": \"3187433725\",\n    \"location\": \"Bogotá, Colombia\",\n    \"webpage\": \"tfcopen.com\",\n    \"tournaments\": [\n        {\n            \"id\": \"7a7f2738-0e7f-4257-aacc-ec32355f4ce4\"\n        }\n    ],\n    \"roles\": []\n}"
+					"body": "{\n    \"id\": \"796f4341-ecd9-4000-b502-69c408118daf\",\n    \"username\": \"jngm00\",\n    \"role\": \"user\",\n    \"tournaments\": [\n        {\n            \"id\": \"e4db12ea-eb4f-4f5d-baaf-30fd7c29b294\",\n            \"category\": \"intermidiate\",\n            \"tournament\": {\n                \"id\": \"2a6a4ca6-109b-489d-aace-8377c503a992\",\n                \"name\": \"TurboBet\",\n                \"date\": \"23/04/2025\",\n                \"address\": \"Cancha Los Heroes\",\n                \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\"\n            }\n        },\n        {\n            \"id\": \"11b618ec-ca2a-46eb-b05c-aa4ead7161e0\",\n            \"category\": \"intermidiate\",\n            \"tournament\": {\n                \"id\": \"767d97df-ca52-4a19-830b-a4576c9dc7d5\",\n                \"name\": \"Golf Masters\",\n                \"date\": \"23/04/2025\",\n                \"address\": \"Briceño\",\n                \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\"\n            }\n        },\n        {\n            \"id\": \"752c3048-9980-4960-90b9-dab747037087\",\n            \"category\": \"intermidiate\",\n            \"tournament\": {\n                \"id\": \"7a7f2738-0e7f-4257-aacc-ec32355f4ce4\",\n                \"name\": \"Basket Masters\",\n                \"date\": \"23/09/2025\",\n                \"address\": \"Sauzalito\",\n                \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\"\n            }\n        }\n    ]\n}"
 				}
 			]
 		},
 		{
-			"name": "Update  invalid tournaments from an organizer",
+			"name": "Update invalid tournaments from a user",
 			"event": [
 				{
 					"listen": "test",
@@ -732,7 +746,7 @@
 							"\r",
 							"pm.test(\"Get expected error message\", function () {\r",
 							"   var data = pm.response.json();\r",
-							"   pm.expect(data.message).to.eql(\"The tournament isnt associated to the organizer\");\r",
+							"   pm.expect(data.message).to.eql(\"A tournament from the list of tournaments does not exist\");\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -753,20 +767,20 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments",
+					"raw": "{{baseURL}}/users/{{user_id}}/tournaments",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
-						"{{organizer_id}}",
+						"users",
+						"{{user_id}}",
 						"tournaments"
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "Update  invalid tournaments from an organizer",
+					"name": "Update invalid tournaments from a user",
 					"originalRequest": {
 						"method": "PUT",
 						"header": [],
@@ -780,34 +794,28 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments",
+							"raw": "{{baseURL}}/users/{{user_id}}/tournaments",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
-								"{{organizer_id}}",
+								"users",
+								"{{user_id}}",
 								"tournaments"
 							]
 						}
 					},
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json",
-							"name": "Content-Type",
-							"description": "",
-							"type": "text"
-						}
-					],
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
 					"cookie": [],
-					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The tournament isnt associated to the organizer\"\n}"
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The user with the given id was not found\"\r\n}"
 				}
 			]
 		},
 		{
-			"name": "Update the tournaments from an invalid organizer",
+			"name": "Update tournaments from an invalid user",
 			"event": [
 				{
 					"listen": "test",
@@ -819,7 +827,7 @@
 							"\r",
 							"pm.test(\"Get expected error message\", function () {\r",
 							"   var data = pm.response.json();\r",
-							"   pm.expect(data.message).to.eql(\"The organizer with the given id was not found\");\r",
+							"   pm.expect(data.message).to.eql(\"The user with the given id was not found\");\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -832,7 +840,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "[\r\n   {\r\n       \"id\": \"{{tournament_id}}\"\r\n   }\r\n]",
+					"raw": "[\r\n    {\r\n        \"id\": \"{{tournament_id}}\"\r\n    }\r\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -840,12 +848,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments",
+					"raw": "{{baseURL}}/users/00000000-0000-0000-0000-000000000000/tournaments",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
+						"users",
 						"00000000-0000-0000-0000-000000000000",
 						"tournaments"
 					]
@@ -853,26 +861,17 @@
 			},
 			"response": [
 				{
-					"name": "Update the tournaments from an invalid organizer",
+					"name": "Update tournaments from an invalid user",
 					"originalRequest": {
 						"method": "PUT",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n   {\r\n       \"id\": \"{{tournament_id2}}\"\r\n   }\r\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments",
+							"raw": "{{baseURL}}/users/00000000-0000-0000-0000-000000000000/tournaments",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
+								"users",
 								"00000000-0000-0000-0000-000000000000",
 								"tournaments"
 							]
@@ -891,12 +890,12 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The organizer with the given id was not found\"\n}"
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The tournament with the given id was not found\"\n}"
 				}
 			]
 		},
 		{
-			"name": "Delete a tournament form an organizer",
+			"name": "Delete a tournament from a user",
 			"event": [
 				{
 					"listen": "test",
@@ -915,13 +914,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id}}",
+					"raw": "{{baseURL}}/users/{{user_id}}/tournaments/{{tournament_id}}",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
-						"{{organizer_id}}",
+						"users",
+						"{{user_id}}",
 						"tournaments",
 						"{{tournament_id}}"
 					]
@@ -929,20 +928,20 @@
 			},
 			"response": [
 				{
-					"name": "Delete a tournament from an organizer",
+					"name": "Delete a tournament from a user",
 					"originalRequest": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id}}",
+							"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/{{user_id}}",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
-								"{{organizer_id}}",
 								"tournaments",
-								"{{tournament_id}}"
+								"{{tournament_id}}",
+								"users",
+								"{{user_id}}"
 							]
 						}
 					},
@@ -956,7 +955,7 @@
 			]
 		},
 		{
-			"name": "Delete a tournament form an invalid organizer",
+			"name": "Delete a tournament from an invalid user",
 			"event": [
 				{
 					"listen": "test",
@@ -968,7 +967,7 @@
 							"\r",
 							"pm.test(\"Get expected error message\", function () {\r",
 							"   var data = pm.response.json();\r",
-							"   pm.expect(data.message).to.eql(\"The organizer with the given id was not found\");\r",
+							"   pm.expect(data.message).to.eql(\"The user with the given id was not found\");\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -980,12 +979,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
+					"raw": "{{baseURL}}/users/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
+						"users",
 						"00000000-0000-0000-0000-000000000000",
 						"tournaments",
 						"{{tournament_id}}"
@@ -994,17 +993,17 @@
 			},
 			"response": [
 				{
-					"name": "Delete a tournament form an invalid organizer",
+					"name": "Delete a tournament from an invalid user",
 					"originalRequest": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
+							"raw": "{{baseURL}}/users/00000000-0000-0000-0000-000000000000/tournaments/{{tournament_id}}",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
+								"users",
 								"00000000-0000-0000-0000-000000000000",
 								"tournaments",
 								"{{tournament_id}}"
@@ -1024,12 +1023,12 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The organizer with the given id was not found\"\n}"
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The user with the given id was not found\"\n}"
 				}
 			]
 		},
 		{
-			"name": "Delete an invalid tournament from an organizer",
+			"name": "Delete an invalid tournament from a user",
 			"event": [
 				{
 					"listen": "test",
@@ -1053,13 +1052,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/00000000-0000-0000-0000-000000000000",
+					"raw": "{{baseURL}}/users/{{user_id}}/tournaments/00000000-0000-0000-0000-000000000000",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
-						"{{organizer_id}}",
+						"users",
+						"{{user_id}}",
 						"tournaments",
 						"00000000-0000-0000-0000-000000000000"
 					]
@@ -1067,18 +1066,18 @@
 			},
 			"response": [
 				{
-					"name": "Delete an invalid tournament from an organizer",
+					"name": "Delete an invalid user from a tournament",
 					"originalRequest": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/00000000-0000-0000-0000-000000000000",
+							"raw": "{{baseURL}}/users/{{user_id}}/tournaments/00000000-0000-0000-0000-000000000000",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
-								"{{organizer_id}}",
+								"users",
+								"{{user_id}}",
 								"tournaments",
 								"00000000-0000-0000-0000-000000000000"
 							]
@@ -1102,7 +1101,7 @@
 			]
 		},
 		{
-			"name": "Delete a tournament not associated with an organizer",
+			"name": "Delete a tournament not associated to a user",
 			"event": [
 				{
 					"listen": "test",
@@ -1114,7 +1113,7 @@
 							"\r",
 							"pm.test(\"Get expected error message\", function () {\r",
 							"   var data = pm.response.json();\r",
-							"   pm.expect(data.message).to.eql(\"The deleted tournament is not associated to the organizer\");\r",
+							"   pm.expect(data.message).to.eql(\"The tournament does not exist for the given user\");\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -1126,34 +1125,34 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id2}}",
+					"raw": "{{baseURL}}/users/{{user_id}}/tournaments/{{tournament_id}}",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"organizers",
-						"{{organizer_id}}",
+						"users",
+						"{{user_id}}",
 						"tournaments",
-						"{{tournament_id2}}"
+						"{{tournament_id}}"
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "Delete a tournament not associated with an organizer",
+					"name": "Delete a tournament not associated to a user",
 					"originalRequest": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/organizers/{{organizer_id}}/tournaments/{{tournament_id}}",
+							"raw": "{{baseURL}}/tournaments/{{tournament_id}}/users/{{user_id}}",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"organizers",
-								"{{organizer_id}}",
 								"tournaments",
-								"{{tournament_id}}"
+								"{{tournament_id}}",
+								"users",
+								"{{user_id}}"
 							]
 						}
 					},
@@ -1162,7 +1161,7 @@
 					"_postman_previewlanguage": null,
 					"header": null,
 					"cookie": [],
-					"body": "{\r\n   \"statusCode\": 412,\r\n   \"message\": \"The tournament with the given id is not associated to the organizer\"\r\n}"
+					"body": "{\r\n   \"statusCode\": 412,\r\n   \"message\": \"The user with the given id is not associated to the tournament\"\r\n}"
 				}
 			]
 		}
@@ -1196,18 +1195,33 @@
 			"type": "string"
 		},
 		{
+			"key": "user_id",
+			"value": "796f4341-ecd9-4000-b502-69c408118daf",
+			"type": "string"
+		},
+		{
 			"key": "tournament_id",
-			"value": "036c7600-310b-446f-9cf8-683d49265456",
+			"value": "2a6a4ca6-109b-489d-aace-8377c503a992",
 			"type": "string"
 		},
 		{
-			"key": "organizer_id",
-			"value": "70880dc4-91cc-452f-91bc-c7ef93b43e80",
+			"key": "tournaments_id2",
+			"value": "619d32e5-6c26-4930-b33a-1454eebc2c32",
 			"type": "string"
 		},
 		{
-			"key": "tournament_id2",
+			"key": "tournament_id3",
+			"value": "767d97df-ca52-4a19-830b-a4576c9dc7d5",
+			"type": "string"
+		},
+		{
+			"key": "tournament_id4",
 			"value": "7a7f2738-0e7f-4257-aacc-ec32355f4ce4",
+			"type": "string"
+		},
+		{
+			"key": "tournament_id5",
+			"value": "036c7600-310b-446f-9cf8-683d49265456",
 			"type": "string"
 		}
 	]

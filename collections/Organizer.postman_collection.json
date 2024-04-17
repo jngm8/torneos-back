@@ -8,12 +8,29 @@
 	"item": [
 		{
 			"name": "Create an organizer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"museum_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"company\": \"TFC Open\",\r\n    \"email\": \"tfcopen@gmail.com\",\r\n    \"phone\": \"3187433725\",\r\n    \"password\": \"tfcopen\",\r\n    \"location\": \"Bogotá, Colombia\",\r\n    \"webpage\":\"tfcopen.com\"\r\n}",
+					"raw": "{\r\n    \"company\": \"OpenTech Solutions\",\r\n    \"email\": \"opentech@gmail.com\",\r\n    \"phone\": \"5551234567\",\r\n    \"password\": \"securePassword123\",\r\n    \"location\": \"New York, USA\",\r\n    \"webpage\": \"opentechsolutions.com\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -48,15 +65,42 @@
 					},
 					"status": "Created",
 					"code": 201,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": "{\r\n    \"id\": \"7f1f43fa-2acc-4298-85c0-90e1649f9b6c\"\r\n    \"company\": \"TFC Open\",\r\n    \"email\": \"tfcopen@gmail.com\",\r\n    \"phone\": \"3187433725\",\r\n    \"password\": \"tfcopen\",\r\n    \"location\": \"Bogotá, Colombia\",\r\n    \"webpage\":\"tfcopen.com\"\r\n}"
+					"body": "{\n    \"company\": \"OpenTech Solutions\",\n    \"email\": \"opentech@gmail.com\",\n    \"phone\": \"5551234567\",\n    \"password\": \"securePassword123\",\n    \"location\": \"New York, USA\",\n    \"webpage\": \"opentechsolutions.com\",\n    \"id\": \"a5c9a0e6-85bc-4a24-b1b9-69b3922e8291\"\n}"
 				}
 			]
 		},
 		{
 			"name": "Get all organizers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of organizers > ' + 0, function () {\r",
+							"   var data = pm.response.json()\r",
+							"   pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -88,15 +132,37 @@
 					},
 					"status": "OK",
 					"code": 200,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": "[\r\n    {\r\n        \"id\": \"7f1f43fa-2acc-4298-85c0-90e1649f9b6c\"\r\n        \"company\": \"TFC Open\",\r\n        \"email\": \"tfcopen@gmail.com\",\r\n        \"phone\": \"3187433725\",\r\n        \"password\": \"tfcopen\",\r\n        \"location\": \"Bogotá, Colombia\",\r\n        \"webpage\":\"tfcopen.com\",\r\n        \"roles\":[\"user\",\"organizer\"],\r\n        \"tournaments\":\r\n        [\r\n            {\r\n                \"name\": \"TFC Open Tennis Tour\",\r\n                \"address\" : \"La Verdieri Club\",\r\n                \"date\":\"24/02/2024\",\r\n                \"athletes\": \r\n                [\r\n                        {\r\n                            \"username\": \"Carlos\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                            ]\r\n                        },\r\n                        {\r\n                            \"username\": \"Andres\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                                ]\r\n                        },\r\n                ]\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"id\": \"7f1f43fa-2acc-4298-85c0-90e1649f9b6c\",\r\n        \"company\": \"Chess Masters Association\",\r\n        \"email\": \"info@chessmasters.org\",\r\n        \"phone\": \"1234567890\",\r\n        \"password\": \"chessmasters\",\r\n        \"location\": \"New York, USA\",\r\n        \"webpage\": \"chessmasters.org\",\r\n        \"roles\":[\"user\",\"organizer\"],\r\n        \"tournaments\": \r\n        [\r\n            {\r\n            \"name\": \"Chess Masters Championship\",\r\n            \"address\": \"Central Park Convention Center\",\r\n            \"date\": \"15/07/2024\",\r\n            \"athletes\": \r\n                [\r\n                    {\r\n                    \"username\": \"Alice\",\r\n                    \"roles\": [\"user\"]\r\n                    },\r\n                    {\r\n                    \"username\": \"Bob\",\r\n                    \"roles\": [\"user\"]\r\n                    }\r\n                ]\r\n            }\r\n        ]\r\n    }\r\n\r\n]"
+					"body": "[\n    {\n        \"id\": \"a5c9a0e6-85bc-4a24-b1b9-69b3922e8291\",\n        \"company\": \"OpenTech Solutions\",\n        \"email\": \"opentech@gmail.com\",\n        \"password\": \"securePassword123\",\n        \"phone\": \"5551234567\",\n        \"location\": \"New York, USA\",\n        \"webpage\": \"opentechsolutions.com\",\n        \"tournaments\": [],\n        \"roles\": []\n    },\n    {\n        \"id\": \"70880dc4-91cc-452f-91bc-c7ef93b43e80\",\n        \"company\": \"TFC Open\",\n        \"email\": \"tfcopen@gmail.com\",\n        \"password\": \"tfcopen\",\n        \"phone\": \"3187433725\",\n        \"location\": \"Bogotá, Colombia\",\n        \"webpage\": \"tfcopen.com\",\n        \"tournaments\": [],\n        \"roles\": []\n    }\n]"
 				}
 			]
 		},
 		{
 			"name": "Get an organizer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -130,15 +196,42 @@
 					},
 					"status": "OK",
 					"code": 200,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": "    {\r\n        \"id\": \"7f1f43fa-2acc-4298-85c0-90e1649f9b6c\",\r\n        \"company\": \"TFC Open\",\r\n        \"email\": \"tfcopen@gmail.com\",\r\n        \"phone\": \"3187433725\",\r\n        \"password\": \"tfcopen\",\r\n        \"location\": \"Bogotá, Colombia\",\r\n        \"webpage\":\"tfcopen.com\",\r\n        \"roles\":[\"user\",\"organizer\"],\r\n        \"tournaments\":\r\n        [\r\n            {\r\n                \"name\": \"TFC Open Tennis Tour\",\r\n                \"address\" : \"La Verdieri Club\",\r\n                \"date\":\"24/02/2024\",\r\n                \"athletes\": \r\n                [\r\n                        {\r\n                            \"username\": \"Carlos\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                            ]\r\n                        },\r\n                        {\r\n                            \"username\": \"Andres\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                                ]\r\n                        },\r\n                ]\r\n            }\r\n        ]\r\n    }"
+					"body": "{\n    \"id\": \"a5c9a0e6-85bc-4a24-b1b9-69b3922e8291\",\n    \"company\": \"OpenTech Solutions\",\n    \"email\": \"opentech@gmail.com\",\n    \"password\": \"securePassword123\",\n    \"phone\": \"5551234567\",\n    \"location\": \"New York, USA\",\n    \"webpage\": \"opentechsolutions.com\",\n    \"roles\": [],\n    \"tournaments\": []\n}"
 				}
 			]
 		},
 		{
 			"name": "Get an invalid organizer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The organizer with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -172,21 +265,43 @@
 					},
 					"status": "Not Found",
 					"code": 404,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The organizer with the given id was not found\"\r\n}"
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The organizer with the given id was not found\"\n}"
 				}
 			]
 		},
 		{
 			"name": "Update an organizer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"id\": \"7f1f43fa-2acc-4298-85c0-90e1649f9b6c\",\r\n        \"company\": \"TFC Open Innovated\",\r\n        \"email\": \"tfcopenInnovated@gmail.com\",\r\n        \"phone\": \"3187433725\",\r\n        \"password\": \"tfcopenI\",\r\n        \"location\": \"Bogotá, Colombia\",\r\n        \"webpage\":\"tfcopen.com\",\r\n        \"roles\":[\"user\",\"organizer\"],\r\n        \"tournaments\":\r\n        [\r\n            {\r\n                \"name\": \"TFC Open Tennis Tour\",\r\n                \"address\" : \"La Verdieri Club\",\r\n                \"date\":\"24/02/2024\",\r\n                \"athletes\": \r\n                [\r\n                        {\r\n                            \"username\": \"Carlos\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                            ]\r\n                        },\r\n                        {\r\n                            \"username\": \"Andres\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                                ]\r\n                        }\r\n                ]\r\n            }\r\n        ]\r\n    }",
+					"raw": "{\r\n    \"id\": \"a5c9a0e6-85bc-4a24-b1b9-69b3922e8291\",\r\n    \"company\": \"MarkeTours\",\r\n    \"email\": \"opentech@gmail.com\",\r\n    \"password\": \"securePassword123\",\r\n    \"phone\": \"5551234567\",\r\n    \"location\": \"New York, USA\",\r\n    \"webpage\": \"opentechsolutions.com\",\r\n    \"roles\": [],\r\n    \"tournaments\": []\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -232,18 +347,54 @@
 					},
 					"status": "OK",
 					"code": 200,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": "    {\r\n        \"id\": \"7f1f43fa-2acc-4298-85c0-90e1649f9b6c\",\r\n        \"company\": \"TFC Open Innovated\",\r\n        \"email\": \"tfcopenInnovated@gmail.com\",\r\n        \"phone\": \"3187433725\",\r\n        \"password\": \"tfcopenI\",\r\n        \"location\": \"Bogotá, Colombia\",\r\n        \"webpage\":\"tfcopen.com\",\r\n        \"roles\":[\"user\",\"organizer\"],\r\n        \"tournaments\":\r\n        [\r\n            {\r\n                \"name\": \"TFC Open Tennis Tour\",\r\n                \"address\" : \"La Verdieri Club\",\r\n                \"date\":\"24/02/2024\",\r\n                \"athletes\": \r\n                [\r\n                        {\r\n                            \"username\": \"Carlos\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                            ]\r\n                        },\r\n                        {\r\n                            \"username\": \"Andres\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                                ]\r\n                        }\r\n                ]\r\n            }\r\n        ]\r\n    }"
+					"body": "{\n    \"id\": \"a5c9a0e6-85bc-4a24-b1b9-69b3922e8291\",\n    \"company\": \"MarkeTours\",\n    \"email\": \"opentech@gmail.com\",\n    \"password\": \"securePassword123\",\n    \"phone\": \"5551234567\",\n    \"location\": \"New York, USA\",\n    \"webpage\": \"opentechsolutions.com\",\n    \"roles\": [],\n    \"tournaments\": []\n}"
 				}
 			]
 		},
 		{
 			"name": "Update an invalid user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The organizer with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"company\": \"TFC Open Innovated\",\r\n        \"email\": \"tfcopenInnovated@gmail.com\",\r\n        \"phone\": \"3187433725\",\r\n        \"password\": \"tfcopenInnovated\",\r\n        \"location\": \"Bogotá, Colombia\",\r\n        \"webpage\":\"tfcopen.com\",\r\n        \"roles\":[\"user\",\"organizer\"],\r\n        \"tournaments\":\r\n        [\r\n            {\r\n                \"name\": \"TFC Open Tennis Tour\",\r\n                \"address\" : \"La Verdieri Club\",\r\n                \"date\":\"24/02/2024\",\r\n                \"athletes\": \r\n                [\r\n                        {\r\n                            \"username\": \"Carlos\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                            ]\r\n                        },\r\n                        {\r\n                            \"username\": \"Andres\",\r\n                            \"roles\": [\r\n                                \"user\"\r\n                                ]\r\n                        }\r\n                ]\r\n            }\r\n        ]\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{baseURL}}/organizers/00000000-0000-0000-0000-000000000000",
 					"host": [
@@ -274,15 +425,37 @@
 					},
 					"status": "Not Found",
 					"code": 404,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The organizer with the given id was not found\"\r\n}"
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The organizer with the given id was not found\"\n}"
 				}
 			]
 		},
 		{
 			"name": "Delete an organizer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -325,6 +498,25 @@
 		},
 		{
 			"name": "Delete an invalid organizer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The organizer with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -358,10 +550,18 @@
 					},
 					"status": "Not Found",
 					"code": 404,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The organizer with the given id was not found\"\r\n}"
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The organizer with the given id was not found\"\n}"
 				}
 			]
 		}
@@ -396,7 +596,7 @@
 		},
 		{
 			"key": "organizer_id",
-			"value": "7f1f73df-2acc-4288-85c0-90f4649f9b6c",
+			"value": "a5c9a0e6-85bc-4a24-b1b9-69b3922e8291",
 			"type": "string"
 		}
 	]

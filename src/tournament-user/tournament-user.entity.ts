@@ -8,8 +8,8 @@ export class TournamentUserEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string
 
-    @Column({ type: 'int'})
-    participants: number
+    @Column()
+    category: string
 
     // ManyToOne relation between tournament and user (ManyToMany relation)|| A tournament has many users
     @ManyToOne(() => TournamentEntity, (tournament) => tournament.users)

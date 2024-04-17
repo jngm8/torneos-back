@@ -8,12 +8,29 @@
 	"item": [
 		{
 			"name": "Create tournament",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"tournament_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"TFC Open\",\r\n    \"address\" : \"La Verdieri Club\",\r\n    \"date\":\"24/02/2024\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Voleibol Now\",\r\n    \"address\" : \"Simón Bolivar\",\r\n    \"date\":\"23/09/2025\",\r\n    \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -68,12 +85,31 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\r\n    \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\r\n    \"name\": \"TFC Open\",\r\n    \"address\" : \"La Verdieri Club\",\r\n    \"date\":\"24/02/2024\"\r\n}"
+					"body": "{\r\n    \"name\": \"Voleibol Now\",\r\n    \"address\": \"Simón Bolivar\",\r\n    \"date\": \"23/09/2025\",\r\n    \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\",\r\n    \"id\": \"2b3d7c1b-a961-4539-8911-86c13433d77b\"\r\n}"
 				}
 			]
 		},
 		{
 			"name": "Get all tournaments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of tournamnets > ' + 0, function () {\r",
+							"   var data = pm.response.json()\r",
+							"   pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -121,15 +157,37 @@
 					},
 					"status": "OK",
 					"code": 200,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": "[\r\n    {\r\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\r\n        \"name\": \"TFC Open Tennis Tour\",\r\n        \"address\" : \"La Verdieri Club\",\r\n        \"start_date\": \"2024-04-01\",\r\n        \"end_date\": \"2024-04-05\",\r\n        \"users\": [\r\n            {\r\n            \"username\": \"Carlos\",\r\n            \"role\": \"user\"\r\n            },\r\n            {\r\n            \"username\": \"Andres\",\r\n            \"role\": \"user\"\r\n            },\r\n        ],\r\n        \"organizer\": {\r\n            \"company\": \"TFC Open\",\r\n            \"roles\":[\r\n                \"organizer\",\r\n                \"user\"\r\n            ]\r\n        }\r\n    },\r\n    {\r\n    \"id\": \"23b9ab90-1276-11ed-451d-0242ac120002\",\r\n    \"name\": \"Padel Tour\",\r\n    \"address\" : \"Heroes Club\",\r\n    \"start_date\": \"2024-02-10\",\r\n    \"end_date\": \"2024-09-13\",\r\n    \"users\": [\r\n        {\r\n        \"username\": \"Pedro\",\r\n        \"role\": \"user\"\r\n        },\r\n        {\r\n        \"username\": \"Camilo\",\r\n        \"role\": \"user\"\r\n        },\r\n    ],\r\n    \"organizer\": {\r\n        \"company\": \"PadelHouse\",\r\n        \"roles\":[\r\n            \"organizer\",\r\n            \"user\"\r\n            ]\r\n        }\r\n    }\r\n]"
+					"body": "[\n    {\n        \"id\": \"2a6a4ca6-109b-489d-aace-8377c503a992\",\n        \"name\": \"TurboBet\",\n        \"date\": \"23/04/2025\",\n        \"address\": \"Cancha Los Heroes\",\n        \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\",\n        \"organizer\": null,\n        \"users\": []\n    },\n    {\n        \"id\": \"619d32e5-6c26-4930-b33a-1454eebc2c32\",\n        \"name\": \"PadelTour\",\n        \"date\": \"23/04/2025\",\n        \"address\": \"LocosxPadel\",\n        \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\",\n        \"organizer\": null,\n        \"users\": []\n    },\n    {\n        \"id\": \"767d97df-ca52-4a19-830b-a4576c9dc7d5\",\n        \"name\": \"Golf Masters\",\n        \"date\": \"23/04/2025\",\n        \"address\": \"Briceño\",\n        \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\",\n        \"organizer\": null,\n        \"users\": [\n            {\n                \"id\": \"d24c811b-b723-46c2-994b-b5792746d5f9\",\n                \"category\": \"intermidiate\"\n            }\n        ]\n    },\n    {\n        \"id\": \"7a7f2738-0e7f-4257-aacc-ec32355f4ce4\",\n        \"name\": \"Basket Masters\",\n        \"date\": \"23/09/2025\",\n        \"address\": \"Sauzalito\",\n        \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\",\n        \"organizer\": null,\n        \"users\": []\n    },\n    {\n        \"id\": \"036c7600-310b-446f-9cf8-683d49265456\",\n        \"name\": \"TFC Open\",\n        \"date\": \"24/02/2024\",\n        \"address\": \"La Verdieri Club\",\n        \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\",\n        \"organizer\": null,\n        \"users\": [\n            {\n                \"id\": \"25e33222-4c23-4f1a-92dd-9f4d1386bf18\",\n                \"category\": \"intermidiate\"\n            }\n        ]\n    },\n    {\n        \"id\": \"2b3d7c1b-a961-4539-8911-86c13433d77b\",\n        \"name\": \"Voleibol Now\",\n        \"date\": \"23/09/2025\",\n        \"address\": \"Simón Bolivar\",\n        \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\",\n        \"organizer\": null,\n        \"users\": []\n    }\n]"
 				}
 			]
 		},
 		{
 			"name": "Get a tournament",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -179,15 +237,42 @@
 					},
 					"status": "OK",
 					"code": 200,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": "{\r\n    \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\r\n    \"name\": \"TFC Open Tennis Tour\",\r\n    \"address\" : \"La Verdieri Club\",\r\n    \"date\":\"24/02/2024\",\r\n    \"users\": [\r\n        {\r\n        \"username\": \"Carlos\",\r\n        \"roles\": [\r\n            \"user\"\r\n        ]\r\n        },\r\n        {\r\n        \"username\": \"Andres\",\r\n        \"roles\": [\r\n            \"user\"\r\n        ]\r\n        },\r\n    ],\r\n    \"organizer\": {\r\n        \"company\": \"TFC Open\",\r\n        \"roles\":[\r\n            \"admin\",\r\n            \"user\"\r\n        ]\r\n    }\r\n}"
+					"body": "{\r\n    \"id\": \"2b3d7c1b-a961-4539-8911-86c13433d77b\",\r\n    \"name\": \"Voleibol Now\",\r\n    \"date\": \"23/09/2025\",\r\n    \"address\": \"Simón Bolivar\",\r\n    \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\",\r\n    \"users\": [],\r\n    \"organizer\": null\r\n}"
 				}
 			]
 		},
 		{
 			"name": "Get an invalid tournament",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The tournament with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -221,21 +306,43 @@
 					},
 					"status": "Not Found",
 					"code": 404,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The tournament with the given id was not found\"\r\n}"
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The tournament with the given id was not found\"\n}"
 				}
 			]
 		},
 		{
 			"name": "Update a tournament",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"TFC Open\",\r\n    \"address\" : \"La Verdieri Club\",\r\n    \"date\":\"24/02/2025\"\r\n}",
+					"raw": "{\r\n    \"id\": \"2b3d7c1b-a961-4539-8911-86c13433d77b\",\r\n    \"name\": \"Voleibol Now\",\r\n    \"date\": \"23/09/2025\",\r\n    \"address\": \"Parque EL Country\",\r\n    \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\",\r\n    \"users\": [],\r\n    \"organizer\": null\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -281,18 +388,54 @@
 					},
 					"status": "OK",
 					"code": 200,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": "{\r\n    \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\r\n    \"name\": \"TFC Open Tennis Tour\",\r\n    \"address\" : \"La Verdieri Club\",\r\n    \"date\":\"24/02/2025\"\r\n}"
+					"body": "{\n    \"id\": \"2b3d7c1b-a961-4539-8911-86c13433d77b\",\n    \"name\": \"Voleibol Now\",\n    \"date\": \"23/09/2025\",\n    \"address\": \"Parque EL Country\",\n    \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\",\n    \"users\": [],\n    \"organizer\": null\n}"
 				}
 			]
 		},
 		{
 			"name": "Update an invalid tournament",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The tournament with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"TFC Open\",\r\n    \"date\": \"20/01/2024\",\r\n    \"address\": \"La Verdieri Club\",\r\n    \"image\": \"https://media.istockphoto.com/id/1455497361/es/foto/pareja-joven-en-cancha-de-tenis-hombre-guapo-y-mujer-atractiva-est%C3%A1n-jugando-al-tenis.jpg?s=1024x1024&w=is&k=20&c=5Oz2FcTQBQZD7tpueMK7zvuqW9Ffy3mDjeOJPxqb62c=\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{baseURL}}/tournaments/00000000-0000-0000-0000-000000000000",
 					"host": [
@@ -323,15 +466,37 @@
 					},
 					"status": "Not Found",
 					"code": 404,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The tournament with the given id was not found\"\r\n}"
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The tournament with the given id was not found\"\n}"
 				}
 			]
 		},
 		{
 			"name": "Delete a tournament",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -392,6 +557,25 @@
 		},
 		{
 			"name": "Delete an invalid tournament",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The tournament with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -425,10 +609,18 @@
 					},
 					"status": "Not Found",
 					"code": 404,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The tournament with the given id was not found\"\r\n}"
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The tournament with the given id was not found\"\n}"
 				}
 			]
 		}
@@ -463,7 +655,7 @@
 		},
 		{
 			"key": "tournament_id",
-			"value": "48a9ab90-1276-11ed-861d-0242ac120002",
+			"value": "2b3d7c1b-a961-4539-8911-86c13433d77b",
 			"type": "string"
 		}
 	]

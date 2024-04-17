@@ -8,4 +8,3 @@ export function BusinessLogicException(message: string, type: number) {
     PRECONDITION_FAILED,
     BAD_REQUEST
   }
-  /* archivo: src/shared/errors/business-errors.ts */

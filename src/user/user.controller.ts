@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
 import { UserEntity } from './user.entity';
 import { UserService } from './user.service';
 import { UserDto } from './user.dto/user.dto';
 import { plainToInstance } from 'class-transformer';
+import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors/business-errors.interceptor';
 
-@Controller('user')
+@Controller('users')
+@UseInterceptors(BusinessErrorsInterceptor)
 export class UserController {
 
     constructor(
@@ -16,7 +18,7 @@ export class UserController {
         return this.userService.findAll();
     }
 
-    @Get('userId')
+    @Get(':userId')
     findOne(@Param('userId') userId: string): Promise<UserEntity> {
         return this.userService.findOne(userId);
     }
@@ -27,7 +29,7 @@ export class UserController {
         return this.userService.create(user);
     }
 
-    @Put('userId')
+    @Put(':userId')
     update(@Param('userId') userId: string, @Body() userDto: UserDto): Promise<UserEntity> {
         const user : UserEntity = plainToInstance(UserEntity, userDto);
         return this.userService.update(userId, user);

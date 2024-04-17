@@ -45,10 +45,10 @@ export class OrganizerTournamentService {
         if (!tournament)
             throw new BusinessLogicException("The tournament with the given id was not found", BusinessError.NOT_FOUND);
 
-        const organizerTournament : TournamentEntity = organizer.tournaments.find(tournament => tournament.id === tournament.id);
+        const organizerTournament : TournamentEntity = organizer.tournaments.find(tour => tour.id === tournament.id);
 
         if(!organizerTournament)
-            throw new BusinessLogicException("The organizer does not have this tournament", BusinessError.PRECONDITION_FAILED)
+            throw new BusinessLogicException("The tournament with the given id is not associated to the organizer", BusinessError.PRECONDITION_FAILED);
         
         return organizerTournament;
     }

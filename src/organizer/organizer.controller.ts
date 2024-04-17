@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
 import { OrganizerService } from './organizer.service';
 import { OrganizerEntity } from './organizer.entity';
 import { OrganizerDto } from './organizer.dto/organizer.dto';
 import { plainToInstance } from 'class-transformer';
+import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors/business-errors.interceptor';
 
-@Controller('organizer')
+@Controller('organizers')
+@UseInterceptors(BusinessErrorsInterceptor)
 export class OrganizerController {
 
     constructor(
@@ -28,7 +30,7 @@ export class OrganizerController {
     }
 
     @Put(':organizerId')
-    update(@Param() organizerId: string, @Body() organizerDto: OrganizerDto): Promise<OrganizerEntity> {
+    update(@Param('organizerId') organizerId: string, @Body() organizerDto: OrganizerDto): Promise<OrganizerEntity> {
         const organizer : OrganizerEntity = plainToInstance(OrganizerEntity, organizerDto)
         return this.organizerService.update(organizerId,organizer)
     }

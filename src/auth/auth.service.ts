@@ -21,18 +21,20 @@ export class AuthService {
         return this.userRepository.findOne({ where: { username }, select: ['username','role','password'] });
     }
 
-   async signUp(authUserDto:AuthUserDto) : Promise<void> {
+   async signUp(user:UserEntity) : Promise<void> {
 
-    const { username, password, } = authUserDto;
+
+    const username = user.username;
+    const password = user.password;
 
     const salt = await bcrypt.genSalt();
 
     const hashedPassword = await bcrypt.hash(password,salt);
 
-    const user = await this.userRepository.create({ username, password: hashedPassword})
+    const newUser = await this.userRepository.create({ username, password: hashedPassword})
     
     try {
-        await this.userRepository.save(user);
+        await this.userRepository.save(newUser);
     } catch (error) {
         if(error.code === '23505') {
             throw new ConflictException("Username already exists")
@@ -50,6 +52,10 @@ export class AuthService {
 
     if ((user) && (await bcrypt.compare(password, user.password))) {
         const payload: JwtPayload = { username, role: user.role}
+
+        console.log(payload);
+        console.log(user.role);
+                
 
         const accessToken: string = await this.jwtService.sign(payload);
 
