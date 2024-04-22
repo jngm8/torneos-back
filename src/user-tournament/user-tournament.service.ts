@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { TournamentUserEntity } from './user-tournament.entity';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 import { TournamentEntity } from '../tournament/tournament.entity';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class TournamentUserService {
@@ -38,7 +39,9 @@ export class TournamentUserService {
         tournamentUser.tournament = tournament;
         tournamentUser.user = user;
 
-        user.tournaments = [...user.tournaments, tournamentUser]
+        const plainClass = plainToClass(TournamentUserEntity, tournamentUser)
+
+        user.tournaments = [...user.tournaments, plainClass]
 
         return await this.tournamentUserRepository.save(tournamentUser);        
 
@@ -95,7 +98,7 @@ export class TournamentUserService {
             listTournaments.push(tournamentUser);
             await this.tournamentUserRepository.save(tournamentUser);
         }
-        
+
         return listTournaments;
 
     }
