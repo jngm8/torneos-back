@@ -4,7 +4,7 @@ import { UserEntity } from '../user/user.entity';
 import { Repository } from 'typeorm';
 import { TournamentUserEntity } from './user-tournament.entity';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
-import { TournamentEntity } from 'src/tournament/tournament.entity';
+import { TournamentEntity } from '../tournament/tournament.entity';
 
 @Injectable()
 export class TournamentUserService {
@@ -38,7 +38,9 @@ export class TournamentUserService {
         tournamentUser.tournament = tournament;
         tournamentUser.user = user;
 
-        return await this.tournamentUserRepository.save(tournamentUser);
+        user.tournaments = [...user.tournaments, tournamentUser]
+
+        return await this.tournamentUserRepository.save(tournamentUser);        
 
     }
 
@@ -55,7 +57,7 @@ export class TournamentUserService {
         const userTournament : TournamentUserEntity = user.tournaments.find( tour => tour.tournament.id === tournament.id)
         if (!userTournament)
             throw new BusinessLogicException("The tournament with the given id is not associated to the user", BusinessError.PRECONDITION_FAILED);
-
+        
         return userTournament.tournament;
     }
 
@@ -63,11 +65,10 @@ export class TournamentUserService {
         const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}, relations: ["tournaments", "tournaments.tournament"]});
         if(!user)
             throw new BusinessLogicException("The user with the given id was not found", BusinessError.NOT_FOUND);
-
         return user.tournaments;
     }
 
-    async associateTournamentsToUser(idUser: string, tournaments: TournamentEntity[]) : Promise<{id: string, username: string, role: string, tournaments: TournamentUserEntity[]}> {
+    async associateTournamentsToUser(idUser: string, tournaments: TournamentEntity[]) : Promise<TournamentUserEntity[]> {
         const user : UserEntity = await this.userRepository.findOne({where: {id: idUser}, relations: ["tournaments", "tournaments.tournament"]});
         if(!user)
             throw new BusinessLogicException("The user with the given id was not found", BusinessError.NOT_FOUND);
@@ -85,15 +86,18 @@ export class TournamentUserService {
             await this.tournamentUserRepository.delete({user: user});
 
         //Associate the new tournaments to the user
+        const listTournaments: TournamentUserEntity[] = [];
         for(let i = 0; i < tournaments.length; i++) {
             const tournamentUser : TournamentUserEntity = new TournamentUserEntity();
             tournamentUser.tournament = tournaments[i];
             tournamentUser.user = user;
             tournamentUser.category = "intermidiate";
+            listTournaments.push(tournamentUser);
             await this.tournamentUserRepository.save(tournamentUser);
         }
+        
+        return listTournaments;
 
-        return {id: user.id, username: user.username, role: user.role, tournaments: user.tournaments};
     }
 
     async deleteTournamentFromUser(idUser: string, idTournament: string) {

@@ -34,7 +34,7 @@ export class UserTournamentController {
     }
 
     @Put(':userId/tournaments')
-    associateTournamentsToUser(@Param('userId') userId: string, @Body() tournamentsDto: TournamentDto[]) : Promise<{id: string, username: string, role: string, tournaments: TournamentUserEntity[]}> {
+    associateTournamentsToUser(@Param('userId') userId: string, @Body() tournamentsDto: TournamentDto[]) : Promise<TournamentUserEntity[]> {
         const tournaments = plainToInstance(TournamentEntity, tournamentsDto)
         return this.tournamentUserService.associateTournamentsToUser(userId, tournaments);
     }

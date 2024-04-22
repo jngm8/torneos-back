@@ -7,12 +7,14 @@ import { TournamentUserEntity } from './user-tournament.entity';
 import { faker } from '@faker-js/faker';
 import { Role } from '../shared/enums/role.enum';
 import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
+import { TournamentEntity } from '../tournament/tournament.entity';
 
 describe('TournamentUserService', () => {
   let service: TournamentUserService;
   let tournamentUserRepository: Repository<TournamentUserEntity>;
   let userRepository: Repository<UserEntity>;
   let user: UserEntity;
+  let tournamentRepository: Repository<TournamentEntity>;
   let tournamentList: TournamentUserEntity[];
 
   beforeEach(async () => {
@@ -24,6 +26,7 @@ describe('TournamentUserService', () => {
     service = module.get<TournamentUserService>(TournamentUserService);
     tournamentUserRepository = module.get<Repository<TournamentUserEntity>>(getRepositoryToken(TournamentUserEntity));
     userRepository = module.get<Repository<UserEntity>>(getRepositoryToken(UserEntity));
+    tournamentRepository = module.get<Repository<TournamentEntity>>(getRepositoryToken(TournamentEntity));
     await seedDataBase();
   });
 
@@ -35,7 +38,13 @@ describe('TournamentUserService', () => {
 
     for(let i = 0; i < 5; i++) {
       const tournament : TournamentUserEntity  = await tournamentUserRepository.save({
-        participants: faker.number.int(),
+        category: faker.lorem.word(), 
+        tournament: await tournamentRepository.save({
+          name: faker.person.firstName(),
+          date: faker.date.recent().toString(),
+          address: faker.location.street(),
+          image: faker.image.url()
+        }),
       }); 
       tournamentList.push(tournament);
     }
@@ -57,46 +66,51 @@ describe('TournamentUserService', () => {
 
   it('Add tournament to user', async () => {
 
-    const newTournament : TournamentUserEntity = await tournamentUserRepository.save({
-      participants: faker.number.int(),
-      });
+    const newTournament : TournamentEntity = await tournamentRepository.save({
+      name: faker.person.firstName(),
+      date: faker.date.recent().toString(),
+      address: faker.location.street(),
+      image: faker.image.url()
+    });
 
       const newUser : UserEntity = await userRepository.save({
         username: faker.person.firstName(),
         password: faker.internet.password(),
       });
 
-      const result : UserEntity = await service.addTournamentToUser(newUser.id, newTournament.id);
-      expect(result.tournaments.length).toBe(1);
-      expect(result.tournaments[0]).not.toBeNull();
-      expect(result.tournaments[0].id).toBe(newTournament.id);
+      const result : TournamentUserEntity = await service.addTournamentToUser(newUser.id, newTournament.id, faker.lorem.word());
+      
+      expect(result.user.tournaments.length).toBe(1);
+      expect(result.user.tournaments[0]).not.toBeNull();
+      expect(result.user.tournaments[0].tournament.id).toBe(newTournament.id);
     });
 
-    it('addTurnamentToUser should throw an exception for an invalid tournament', async () => {
+    it('addTournamentToUser should throw an exception for an invalid tournament', async () => {
 
       const newUser : UserEntity = await userRepository.save({
         username: faker.person.firstName(),
         password: faker.internet.password(),
       });
-      await expect(service.addTournamentToUser(newUser.id, "0")).rejects.toHaveProperty("message", "The tournament with the given id was not found");
+      await expect(service.addTournamentToUser(newUser.id, "0",faker.lorem.word(),  
+    )).rejects.toHaveProperty("message", "The tournament with the given id was not found");
     });
 
-    it('addTurnamentToUser should throw an exception for an invalid user', async () => {
+    it('addTournamentToUser should throw an exception for an invalid user', async () => {
 
       const newTournament : TournamentUserEntity = await tournamentUserRepository.save({
-        participants: faker.number.int(),
+        idTournament: faker.string.uuid(),
+        category: faker.lorem.word(),  
       });
-      await expect(service.addTournamentToUser("0", newTournament.id)).rejects.toHaveProperty("message", "The user with the given id was not found");
+      await expect(service.addTournamentToUser("0", newTournament.id,faker.lorem.word())).rejects.toHaveProperty("message", "The user with the given id was not found");
     });
 
     it('findTournamentFromUser find tournament from user', async() => {
       const tournament : TournamentUserEntity = tournamentList[0];
 
-      const storedTournament : TournamentUserEntity = await service.findTournamentFromUser(user.id, tournament.id);
+      const storedTournament : TournamentEntity = await service.findTournamentFromUser(user.id, tournament.tournament.id);
 
       expect(storedTournament).not.toBeNull();
-      expect(storedTournament.id).toBe(tournament.id)
-      expect(storedTournament.participants).toBe(tournament.participants)
+      expect(storedTournament.id).toBe(tournament.tournament.id);
     });
 
     it('findTournamentsFromUser should throw an exception for an invalid user', async() => {
@@ -104,36 +118,38 @@ describe('TournamentUserService', () => {
     });
 
     it('associateTournamentToUser should update a tournament list from a user' , async () => {
-      const newTournament : TournamentUserEntity = await tournamentUserRepository.save({
-        participants: faker.number.int(),
+      const newTournament : TournamentEntity = await tournamentRepository.save({
+        name: faker.person.firstName(),
+        date: faker.date.recent().toString(),
+        address: faker.location.street(),
+        image: faker.image.url()
       });
 
-      const storedUser : UserEntity = await service.associateTournamentsToUser(user.id, [newTournament]);
+      const storedUserTournament : TournamentUserEntity[] = await service.associateTournamentsToUser(user.id, [newTournament]);
 
-      expect(storedUser.tournaments.length).toBe(1);
-      expect(storedUser.tournaments[0].id).toBe(newTournament.id);
+      expect(storedUserTournament.length).toBe(1);
+      expect(storedUserTournament[0].tournament.id).toBe(newTournament.id);
+      expect(storedUserTournament[0].tournament.name).toBe(newTournament.name);
+      expect(storedUserTournament[0].tournament.date).toBe(newTournament.date);
+      expect(storedUserTournament[0].tournament.address).toBe(newTournament.address);
+
     });
 
     it('associateTournamentToUser should throw an exception for an invalid user', async () => {
-      const newTournament : TournamentUserEntity = await tournamentUserRepository.save({
-        participants: faker.number.int(),
+      const newTournament : TournamentEntity = await tournamentRepository.save({
+        name: faker.person.firstName(),
+        date: faker.date.recent().toString(),
+        address: faker.location.street(),
+        image: faker.image.url()
       });
 
       await expect(() => service.associateTournamentsToUser("0", [newTournament])).rejects.toHaveProperty("message", "The user with the given id was not found");
     });
 
-    it('associateTournamentToUser should throw an exception for an invalid tournament', async () => {
-      const newTournament : TournamentUserEntity = tournamentList[0];
-
-      newTournament.id = "0"; 
-
-      expect(() => service.associateTournamentsToUser(user.id, [newTournament])).rejects.toHaveProperty("message", "A tournament from the list of arrays does not exist");
-    });
-
     it('deleteTournamentFromUser should delete a tournament from a user', async () => {
       const tournament : TournamentUserEntity = tournamentList[0];
 
-      await service.deleteTournamentFromUser(user.id, tournament.id);
+      await service.deleteTournamentFromUser(user.id, tournament.tournament.id);
 
       const storedUser : UserEntity = await userRepository.findOne({where: {id: user.id}, relations: ["tournaments"]});
 
@@ -152,8 +168,11 @@ describe('TournamentUserService', () => {
     });
 
     it('deleteTournamentFromUser should throw an exception for a tournament not associated to the user', async () => {
-      const newTournament : TournamentUserEntity = await tournamentUserRepository.save({
-        participants: faker.number.int(),
+      const newTournament : TournamentEntity = await tournamentRepository.save({
+        name: faker.person.firstName(),
+        date: faker.date.recent().toString(),
+        address: faker.location.street(),
+        image: faker.image.url()
       });      
       await expect(() => service.deleteTournamentFromUser(user.id, newTournament.id)).rejects.toHaveProperty("message", "The tournament does not exist for the given user");
     });
