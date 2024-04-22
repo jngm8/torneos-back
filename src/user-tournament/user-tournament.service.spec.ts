@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TournamentUserService } from './tournament-user.service';
+import { TournamentUserService } from './user-tournament.service';
 import { UserEntity } from '../user/user.entity';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { TournamentUserEntity } from './tournament-user.entity';
+import { TournamentUserEntity } from './user-tournament.entity';
 import { faker } from '@faker-js/faker';
 import { Role } from '../shared/enums/role.enum';
 import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';

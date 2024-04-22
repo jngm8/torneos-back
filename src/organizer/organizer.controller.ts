@@ -4,7 +4,9 @@ import { OrganizerEntity } from './organizer.entity';
 import { OrganizerDto } from './organizer.dto/organizer.dto';
 import { plainToInstance } from 'class-transformer';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors/business-errors.interceptor';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('organizers')
 @Controller('organizers')
 @UseInterceptors(BusinessErrorsInterceptor)
 export class OrganizerController {

@@ -4,7 +4,11 @@ import { UserService } from './user.service';
 import { UserDto } from './user.dto/user.dto';
 import { plainToInstance } from 'class-transformer';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors/business-errors.interceptor';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Role } from 'src/shared/enums/role.enum';
 
+@ApiTags('users')
 @Controller('users')
 @UseInterceptors(BusinessErrorsInterceptor)
 export class UserController {
@@ -37,6 +41,8 @@ export class UserController {
 
     
     @Delete(':userId')
+    @ApiBearerAuth()
+    @Auth([Role.ADMIN])
     @HttpCode(204)
     delete(@Param('userId') userId: string) {
         return this.userService.delete(userId);

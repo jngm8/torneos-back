@@ -1,5 +1,5 @@
 import { OrganizerEntity } from "../organizer/organizer.entity";
-import { TournamentUserEntity } from "../tournament-user/tournament-user.entity"
+import { TournamentUserEntity } from "../user-tournament/user-tournament.entity"
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

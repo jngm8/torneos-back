@@ -1,14 +1,18 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
-import { TournamentUserService } from './tournament-user.service';
+import { TournamentUserService } from './user-tournament.service';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors/business-errors.interceptor';
-import { TournamentUserEntity } from './tournament-user.entity';
+import { TournamentUserEntity } from './user-tournament.entity';
 import { TournamentDto } from 'src/tournament/tournament.dto/tournament.dto';
 import { plainToInstance } from 'class-transformer';
 import { TournamentEntity } from 'src/tournament/tournament.entity';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Role } from 'src/shared/enums/role.enum';
 
+@ApiTags('users-tournaments')
 @Controller('users')
 @UseInterceptors(BusinessErrorsInterceptor)
-export class TournamentUserController {
+export class UserTournamentController {
 
     constructor(
         private readonly tournamentUserService: TournamentUserService
@@ -37,6 +41,8 @@ export class TournamentUserController {
 
     @Delete(':userId/tournaments/:tournamentId')
     @HttpCode(204)
+    @ApiBearerAuth()
+    @Auth([Role.ADMIN])
     deleteTournamentFromUser(@Param('userId') userId: string, @Param('tournamentId') tournamentId: string) {
         return this.tournamentUserService.deleteTournamentFromUser(userId, tournamentId);
     }

@@ -8,9 +8,10 @@ import RequestUser from './interfaces/request-user.interface';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors/business-errors.interceptor';
 import { UserEntity } from 'src/user/user.entity';
 import { plainToInstance } from 'class-transformer';
+import { ApiCreatedResponse, ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 
 
-
+@ApiTags('auth')
 @Controller('auth')
 @UseInterceptors(BusinessErrorsInterceptor)
 export class AuthController {
@@ -20,6 +21,8 @@ export class AuthController {
     ){}
 
     @Post('signup')
+    @ApiCreatedResponse({ description: 'The user has been successfully created.'})
+    @ApiForbiddenResponse({ description: 'Forbidden.'})
     signUp(@Body() authUserDto:AuthUserDto): Promise<void>{
         const user : UserEntity = plainToInstance(UserEntity, authUserDto);
         return this.authService.signUp(user);

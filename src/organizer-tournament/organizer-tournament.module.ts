@@ -4,9 +4,10 @@ import { OrganizerTournamentController } from './organizer-tournament.controller
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { OrganizerEntity } from '../organizer/organizer.entity';
 import { TournamentEntity } from '../tournament/tournament.entity';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([OrganizerEntity, TournamentEntity])],
+  imports: [TypeOrmModule.forFeature([OrganizerEntity, TournamentEntity]), AuthModule],
   providers: [OrganizerTournamentService],
   controllers: [OrganizerTournamentController]
 })

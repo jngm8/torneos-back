@@ -2,7 +2,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { OrganizerEntity } from '../../organizer/organizer.entity';
 import { RolesEntity } from '../../roles/roles.entity';
 import { UserEntity } from '../../user/user.entity';
-import { TournamentUserEntity } from '../../tournament-user/tournament-user.entity';
+import { TournamentUserEntity } from '../../user-tournament/user-tournament.entity';
 import { TournamentEntity } from '../../tournament/tournament.entity';
 
 

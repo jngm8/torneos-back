@@ -4,7 +4,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { OrganizerModule } from './organizer/organizer.module';
 import { RolesModule } from './roles/roles.module';
-import { TournamentUserModule } from './tournament-user/tournament-user.module';
+import { TournamentUserModule } from './user-tournament/user-tournament.module';
 import { TournamentModule } from './tournament/tournament.module';
 import { OrganizerTournamentModule } from './organizer-tournament/organizer-tournament.module';
 import { OrganizerRolesModule } from './organizer-roles/organizer-roles.module';

@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Role } from '../shared/enums/role.enum';
-import { TournamentUserEntity } from '../tournament-user/tournament-user.entity';
+import { TournamentUserEntity } from '../user-tournament/user-tournament.entity';
 
 @Entity()
 export class UserEntity{

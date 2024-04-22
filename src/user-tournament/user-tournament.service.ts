@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../user/user.entity';
 import { Repository } from 'typeorm';
-import { TournamentUserEntity } from './tournament-user.entity';
+import { TournamentUserEntity } from './user-tournament.entity';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 import { TournamentEntity } from 'src/tournament/tournament.entity';
 
