@@ -29,7 +29,7 @@ export class AuthController {
     }
 
     @Post('signin')
-    signin(@Body() authUserDto:AuthUserDto): Promise<{accessToken: string, role: Role,user}> {
+    signin(@Body() authUserDto:AuthUserDto): Promise<{accessToken: string, role: Role,user, id:string}> {
         return this.authService.signIn(authUserDto);
     }
 

@@ -31,7 +31,8 @@ describe('TournamentService', () => {
         name: faker.person.firstName(),
         date: faker.date.recent().toString(),
         address: faker.location.street(),
-        image: faker.image.url()
+        image: faker.image.url(),
+        description: faker.lorem.sentence(),
       });
       tournamentList.push(tournament);
     }
@@ -68,6 +69,7 @@ describe('TournamentService', () => {
       date: faker.date.recent().toString(),
       address: faker.location.street(),
       image: faker.image.url(),
+      description: faker.lorem.sentence(),
       organizer: null,
       users: []
     }

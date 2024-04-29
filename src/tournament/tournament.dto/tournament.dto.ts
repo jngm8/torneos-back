@@ -17,4 +17,8 @@ export class TournamentDto {
     @IsNotEmpty()
     @IsString()
     readonly image: string;
+
+    @IsNotEmpty()
+    @IsString()
+    readonly description: string;
 }

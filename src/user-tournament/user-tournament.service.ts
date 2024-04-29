@@ -32,6 +32,10 @@ export class TournamentUserService {
 
         if(!user.tournaments)
             user.tournaments = []
+
+        const userTournament = this.tournamentUserRepository.findOne({where: {user: user, tournament: tournament}});
+        if(userTournament)
+            throw new BusinessLogicException("The tournament is already associated to the user", BusinessError.PRECONDITION_FAILED);
         
         const tournamentUser : TournamentUserEntity = new TournamentUserEntity();
 

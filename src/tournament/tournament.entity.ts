@@ -32,6 +32,9 @@ export class TournamentEntity {
     @Column()
     image: string
 
+    @Column()
+    description: string
+
     // ManyToOne relation between organizer and tournaments || An organizer has many tournaments
     @ManyToOne(() => OrganizerEntity, (organizer) => organizer.tournaments)
     organizer: OrganizerEntity
