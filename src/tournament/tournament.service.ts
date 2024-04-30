@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { TournamentEntity } from './tournament.entity';
 import { Repository } from 'typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
+import * as  moment from 'moment';
 
 @Injectable()
 export class TournamentService {
@@ -24,6 +25,12 @@ export class TournamentService {
    }
 
    async create(tournament: TournamentEntity): Promise<TournamentEntity> {
+    const clientDate = new Date(tournament.date);
+
+    const formattedDate = moment(clientDate).add(1, 'years').format('YYYY-MM-DD');
+
+    tournament.date = formattedDate;
+  
     return await this.tournamentRepository.save(tournament);
    }
 
