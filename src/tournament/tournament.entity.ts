@@ -27,6 +27,9 @@ export class TournamentEntity {
     date: string
 
     @Column()
+    dateEnd: string
+
+    @Column()
     address: string
 
     @Column()

@@ -42,6 +42,7 @@ describe('TournamentUserService', () => {
         tournament: await tournamentRepository.save({
           name: faker.person.firstName(),
           date: faker.date.recent().toString(),
+          dateEnd: faker.date.recent().toString(),
           address: faker.location.street(),
           image: faker.image.url(),
           description: faker.lorem.sentence(),
@@ -70,6 +71,7 @@ describe('TournamentUserService', () => {
     const newTournament : TournamentEntity = await tournamentRepository.save({
       name: faker.person.firstName(),
       date: faker.date.recent().toString(),
+      dateEnd: faker.date.recent().toString(),
       address: faker.location.street(),
       image: faker.image.url(),
       description: faker.lorem.sentence(),
@@ -123,6 +125,7 @@ describe('TournamentUserService', () => {
       const newTournament : TournamentEntity = await tournamentRepository.save({
         name: faker.person.firstName(),
         date: faker.date.recent().toString(),
+        dateEnd: faker.date.recent().toString(),
         address: faker.location.street(),
         image: faker.image.url(),
         description: faker.lorem.sentence(),
@@ -142,6 +145,7 @@ describe('TournamentUserService', () => {
       const newTournament : TournamentEntity = await tournamentRepository.save({
         name: faker.person.firstName(),
         date: faker.date.recent().toString(),
+        dateEnd: faker.date.recent().toString(),
         address: faker.location.street(),
         image: faker.image.url(),
         description: faker.lorem.sentence(),
@@ -175,6 +179,7 @@ describe('TournamentUserService', () => {
       const newTournament : TournamentEntity = await tournamentRepository.save({
         name: faker.person.firstName(),
         date: faker.date.recent().toString(),
+        dateEnd: faker.date.recent().toString(),
         address: faker.location.street(),
         image: faker.image.url(),
         description: faker.lorem.sentence()

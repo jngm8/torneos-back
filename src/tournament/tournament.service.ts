@@ -25,11 +25,20 @@ export class TournamentService {
    }
 
    async create(tournament: TournamentEntity): Promise<TournamentEntity> {
+
+    //Starting Date
     const clientDate = new Date(tournament.date);
 
     const formattedDate = moment(clientDate).add(1, 'years').format('YYYY-MM-DD');
 
     tournament.date = formattedDate;
+
+    // End date
+    const clientDateEnd = new Date(tournament.dateEnd);
+
+    const formattedDateEnd = moment(clientDateEnd).add(1, 'years').format('YYYY-MM-DD');
+
+    tournament.dateEnd = formattedDateEnd;
   
     return await this.tournamentRepository.save(tournament);
    }

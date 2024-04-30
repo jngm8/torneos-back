@@ -14,6 +14,11 @@ export class TournamentDto {
     @IsString()
     readonly date: string;
 
+    
+    @IsNotEmpty()
+    @IsString()
+    readonly dateEnd: string;
+
     @IsNotEmpty()
     @IsString()
     readonly image: string;

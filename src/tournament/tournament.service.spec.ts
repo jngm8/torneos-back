@@ -30,6 +30,7 @@ describe('TournamentService', () => {
       const tournament : TournamentEntity = await repository.save({
         name: faker.person.firstName(),
         date: faker.date.recent().toString(),
+        dateEnd: faker.date.recent().toString(),
         address: faker.location.street(),
         image: faker.image.url(),
         description: faker.lorem.sentence(),
@@ -67,6 +68,7 @@ describe('TournamentService', () => {
       id: "1",
       name: faker.person.firstName(),
       date: faker.date.recent().toString(),
+      dateEnd: faker.date.recent().toString(),
       address: faker.location.street(),
       image: faker.image.url(),
       description: faker.lorem.sentence(),
