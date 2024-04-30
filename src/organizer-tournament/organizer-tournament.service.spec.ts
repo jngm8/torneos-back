@@ -41,6 +41,7 @@ describe('OrganizerTournamentService', () => {
           date: faker.date.recent().toString(),
           address: faker.location.street(),
           image: faker.image.url(),
+          description: faker.lorem.sentence(),
           users: [],
         }); 
         tournamentList.push(tournament);
@@ -67,6 +68,7 @@ describe('OrganizerTournamentService', () => {
       date: faker.date.recent().toString(),
       address: faker.location.street(),
       image: faker.image.url(),
+      description: faker.lorem.sentence(),
       users: [],
     });
 
@@ -111,6 +113,7 @@ describe('OrganizerTournamentService', () => {
       date: faker.date.recent().toString(),
       address: faker.location.street(),
       image: faker.image.url(),
+      description: faker.lorem.sentence(),
       users: [],
     });
     await expect(service.addTournamentToOrganizer("0", newTournament.id)).rejects.toHaveProperty("message", "The organizer with the given id was not found");
@@ -139,6 +142,7 @@ describe('OrganizerTournamentService', () => {
       date: faker.date.recent().toString(),
       address: faker.location.street(),
       image: faker.image.url(),
+      description: faker.lorem.sentence(),
     });
 
     const updatedOrganizer : OrganizerEntity = await service.associateTournamentToOrganizer(organizer.id, [newTournament]);
@@ -158,6 +162,7 @@ describe('OrganizerTournamentService', () => {
       date: faker.date.recent().toString(),
       address: faker.location.street(),
       image: faker.image.url(),
+      description: faker.lorem.sentence(),
     });
 
     await expect(service.associateTournamentToOrganizer("0", [newTournament])).rejects.toHaveProperty("message", "The organizer with the given id was not found");
@@ -198,6 +203,7 @@ describe('OrganizerTournamentService', () => {
       date: faker.date.recent().toString(),
       address: faker.location.street(),
       image: faker.image.url(),
+      description: faker.lorem.sentence(),
     });
 
     await expect(() => service.deleteTournamentFromOrganizer(organizer.id, newTournament.id)).rejects.toHaveProperty("message", "The deleted tournament is not associated to the organizer");

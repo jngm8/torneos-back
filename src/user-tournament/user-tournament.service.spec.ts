@@ -43,7 +43,8 @@ describe('TournamentUserService', () => {
           name: faker.person.firstName(),
           date: faker.date.recent().toString(),
           address: faker.location.street(),
-          image: faker.image.url()
+          image: faker.image.url(),
+          description: faker.lorem.sentence(),
         }),
       }); 
       tournamentList.push(tournament);
@@ -70,7 +71,8 @@ describe('TournamentUserService', () => {
       name: faker.person.firstName(),
       date: faker.date.recent().toString(),
       address: faker.location.street(),
-      image: faker.image.url()
+      image: faker.image.url(),
+      description: faker.lorem.sentence(),
     });
 
       const newUser : UserEntity = await userRepository.save({
@@ -122,7 +124,8 @@ describe('TournamentUserService', () => {
         name: faker.person.firstName(),
         date: faker.date.recent().toString(),
         address: faker.location.street(),
-        image: faker.image.url()
+        image: faker.image.url(),
+        description: faker.lorem.sentence(),
       });
 
       const storedUserTournament : TournamentUserEntity[] = await service.associateTournamentsToUser(user.id, [newTournament]);
@@ -140,7 +143,8 @@ describe('TournamentUserService', () => {
         name: faker.person.firstName(),
         date: faker.date.recent().toString(),
         address: faker.location.street(),
-        image: faker.image.url()
+        image: faker.image.url(),
+        description: faker.lorem.sentence(),
       });
 
       await expect(() => service.associateTournamentsToUser("0", [newTournament])).rejects.toHaveProperty("message", "The user with the given id was not found");
@@ -172,7 +176,8 @@ describe('TournamentUserService', () => {
         name: faker.person.firstName(),
         date: faker.date.recent().toString(),
         address: faker.location.street(),
-        image: faker.image.url()
+        image: faker.image.url(),
+        description: faker.lorem.sentence()
       });      
       await expect(() => service.deleteTournamentFromUser(user.id, newTournament.id)).rejects.toHaveProperty("message", "The tournament does not exist for the given user");
     });
