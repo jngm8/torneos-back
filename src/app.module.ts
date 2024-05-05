@@ -14,7 +14,8 @@ import { OrganizerRolesModule } from './organizer-roles/organizer-roles.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'postgres_db',
+      // host: 'postgres_db', for docker
+      host: 'localhost',
       port: 5432,
       username: 'postgres',
       password: 'postgres',

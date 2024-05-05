@@ -47,8 +47,8 @@ export class TournamentController {
     @ApiBearerAuth()
     @Auth([Role.SUPER_ADMIN])
     @HttpCode(204)
-    delete(@Param('tournamentId') userId: string){
-        return this.tournamentService.delete(userId);
+    delete(@Param('tournamentId') tournamentId: string){
+        return this.tournamentService.delete(tournamentId);
     }
 
 

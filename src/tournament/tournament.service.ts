@@ -50,8 +50,8 @@ export class TournamentService {
     return await this.tournamentRepository.save({...persistedTournament,...tournament})
    }
 
-   async delete(id: string) {
-    const tournament : TournamentEntity = await this.tournamentRepository.findOne({where:{id}});
+   async delete(tournamentId: string) {
+    const tournament : TournamentEntity = await this.tournamentRepository.findOne({where:{id: tournamentId}});
     if (!tournament) 
         throw new BusinessLogicException("The tournament with the given id was not found", BusinessError.NOT_FOUND);
     return await this.tournamentRepository.remove(tournament);

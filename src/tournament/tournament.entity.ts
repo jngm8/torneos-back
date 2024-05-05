@@ -43,6 +43,6 @@ export class TournamentEntity {
     organizer: OrganizerEntity
     
     // OneToMany relation between user and tournament (ManyToMany relation) || A user participates in a specific tournament
-    @OneToMany(() => TournamentUserEntity, (user) => user.tournament)
+    @OneToMany(() => TournamentUserEntity, (user) => user.tournament, { cascade: true })
     users: TournamentUserEntity[]
 }

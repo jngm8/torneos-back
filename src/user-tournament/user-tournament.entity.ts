@@ -12,11 +12,11 @@ export class TournamentUserEntity {
     category: string
 
     // ManyToOne relation between tournament and user (ManyToMany relation)|| A tournament has many users
-    @ManyToOne(() => TournamentEntity, (tournament) => tournament.users)
+    @ManyToOne(() => TournamentEntity, (tournament) => tournament.users, { onDelete: 'CASCADE' })
     tournament: TournamentEntity
 
     // ManyToOne relation between user and tournaments (ManyToMany relation)|| A user has many tournaments
-    @ManyToOne(() => UserEntity, (user) => user.tournaments)
+    @ManyToOne(() => UserEntity, (user) => user.tournaments, { onDelete: 'CASCADE' })
     user: UserEntity
 
 
