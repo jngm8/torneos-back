@@ -37,7 +37,7 @@ export class TournamentController {
 
     @Put(':tournamentId')
     @ApiBearerAuth()
-    @Auth([Role.ADMIN])
+    @Auth([Role.SUPER_ADMIN])
     update(@Param('tournamentId') tournamentId: string, @Body() tournamentDto: TournamentDto ) : Promise<TournamentEntity> {
         const tournament : TournamentEntity = plainToInstance(TournamentEntity, tournamentDto);
         return this.tournamentService.update(tournamentId, tournament);
