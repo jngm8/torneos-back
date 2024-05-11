@@ -17,9 +17,6 @@ export class UserEntity{
   role: Role;
 
   @Column({default: null})
-  accessToken: string;
-
-  @Column({default: null})
   refreshToken: string;
 
 

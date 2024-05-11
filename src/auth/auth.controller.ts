@@ -1,4 +1,4 @@
-import { Controller, Req, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Controller, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthUserDto } from './dto/auth-user.dto';
 import { Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
@@ -7,9 +7,10 @@ import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-erro
 import { UserEntity } from 'src/user/user.entity';
 import { plainToInstance } from 'class-transformer';
 import { ApiCreatedResponse, ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
-// import { RefreshJwtAuthGuard } from './guards/refresh-jwt-auth.guard';
-import { AuthGuard } from '@nestjs/passport';
-import { Request } from 'express';
+import { RefreshJwtAuthGuard } from './guards/refresh-jwt-auth.guard';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { GetUser } from './decorators/get-user.decorator';
+import { GetRefreshToken } from './decorators/get-refresh-token.decorator';
 
 
 @ApiTags('auth')
@@ -24,7 +25,7 @@ export class AuthController {
     @Post('signup')
     @ApiCreatedResponse({ description: 'The user has been successfully created.'})
     @ApiForbiddenResponse({ description: 'Forbidden.'})
-    signUp(@Body() authUserDto:AuthUserDto): Promise<string[]>{
+    signUp(@Body() authUserDto:AuthUserDto): Promise<{access:string, refresh:string}>{
         const user : UserEntity = plainToInstance(UserEntity, authUserDto);
         return this.authService.signUp(user);
     }
@@ -34,22 +35,16 @@ export class AuthController {
         return this.authService.signIn(authUserDto);
     }
 
-    @UseGuards(AuthGuard('jwt'))
+    @UseGuards(JwtAuthGuard)
     @Post('signout')
-    signout(@Req() req: Request): Promise<void> {
-        
-        const userId = req.user;
-        
-        return this.authService.signout(userId["username"]);
+    signout(@GetUser() username: string): Promise<void> {                
+        return this.authService.signout(username);
     }
 
 
-    @UseGuards(AuthGuard('jwt-refresh'))
+    @UseGuards(RefreshJwtAuthGuard)
     @Post('refresh')
-    refresh(@Req() req: Request): Promise<{refresh: string, access: string}> {
-                
-        console.log(req);
-        
-        return this.authService.refresh(req);
+    refresh(@GetUser() username: string, @GetRefreshToken() refreshToken: string): Promise<{refresh: string, access: string}> {  
+        return this.authService.refresh(username, refreshToken);
     }
 }

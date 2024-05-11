@@ -11,7 +11,6 @@ import { RefreshJwtStrategy } from './strategies/refreshToken.strategy';
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
-    PassportModule.register({ defaultStrategy: 'jwt-refresh' }), // Refresh token strategy
     JwtModule.register({
       secret: constants.JWT_SECRET,
       signOptions: {

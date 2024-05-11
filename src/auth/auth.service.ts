@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { ConflictException, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, ForbiddenException, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { UserEntity } from '../user/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -23,7 +23,7 @@ export class AuthService {
         return this.userRepository.findOne({ where: { username }, select: ['username','role','password','id','refreshToken'] });
     }
 
-   async signUp(user:UserEntity) : Promise<string[]> {
+   async signUp(user:UserEntity) : Promise<{access:string, refresh:string}> {
 
 
     const username = user.username;
@@ -46,7 +46,7 @@ export class AuthService {
     try {
         await this.userRepository.save(newUser);
 
-        return [accessToken, refreshToken];
+        return {access: accessToken, refresh: refreshToken};
     } catch (error) {
         if(error.code === '23505') {
             throw new ConflictException("Username already exists")
@@ -106,22 +106,19 @@ export class AuthService {
 
    }
 
-   async refresh(req) : Promise<{refresh: string, access: string}> {
+   async refresh(username: string,refreshToken: string) : Promise<{refresh: string, access: string}> {
     
-    const username = req.user["username"];
-
     const user = await this.findOneByUsernameWithPassword(username);
 
     if (!user) 
         throw new BusinessLogicException("The user with the given id was not found", BusinessError.NOT_FOUND);
 
-    const refreshToken = req.user["refreshToken"];
-
+    if (!user.refreshToken) throw new ForbiddenException('Access Denied');
+    
     const isRefreshTokenValid = await bcrypt.compare(refreshToken, user.refreshToken);
 
     if (!isRefreshTokenValid) 
         throw new UnauthorizedException("Invalid refresh token");
-
 
     const payload: JwtPayload = { username, role: user.role}
 

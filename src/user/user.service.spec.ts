@@ -36,7 +36,6 @@ describe('UserService', () => {
         username: faker.person.firstName(),
         password: faker.internet.password(),
         role: Role.USER,
-        accessToken: faker.string.uuid(),
         refreshToken: faker.string.uuid()
       });
       userList.push(user);
@@ -71,7 +70,6 @@ describe('UserService', () => {
         username: faker.person.firstName(),
         password: faker.internet.password(),
         role: Role.USER,
-        accessToken: faker.string.uuid(),
         refreshToken: faker.string.uuid(),
         tournaments: [],
       }
