@@ -35,6 +35,9 @@ describe('UserService', () => {
       const user : UserEntity = await repository.save({
         username: faker.person.firstName(),
         password: faker.internet.password(),
+        role: Role.USER,
+        accessToken: faker.string.uuid(),
+        refreshToken: faker.string.uuid()
       });
       userList.push(user);
       }
@@ -67,8 +70,10 @@ describe('UserService', () => {
         id: "1",
         username: faker.person.firstName(),
         password: faker.internet.password(),
+        role: Role.USER,
+        accessToken: faker.string.uuid(),
+        refreshToken: faker.string.uuid(),
         tournaments: [],
-        role: Role.USER
       }
 
       const newUser : UserEntity = await service.create(user);

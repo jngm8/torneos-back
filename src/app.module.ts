@@ -30,8 +30,8 @@ import { OrganizerRolesModule } from './organizer-roles/organizer-roles.module';
     TournamentUserModule,
     TournamentModule,
     OrganizerTournamentModule,
-    OrganizerRolesModule,
-  ],
+    OrganizerRolesModule
+    ],
   controllers: [],
   providers: [],
 })
