@@ -44,7 +44,9 @@ export class AuthController {
 
     @UseGuards(RefreshJwtAuthGuard)
     @Post('refresh')
-    refresh(@GetUser() username: string, @GetRefreshToken() refreshToken: string): Promise<{refresh: string, access: string}> {  
+    refresh(@GetUser() username: string, @GetRefreshToken() refreshToken: string): Promise<{refreshToken: string, accessToken: string}> { 
+        console.log(username, refreshToken);
+        
         return this.authService.refresh(username, refreshToken);
     }
 }

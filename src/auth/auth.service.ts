@@ -67,7 +67,7 @@ export class AuthService {
 
         const accessToken: string = this.jwtService.sign(payload);
 
-        const refreshToken: string = this.jwtService.sign(payload, { secret: constants.REFRESH_SECRET, expiresIn: '7d' });
+        const refreshToken: string = this.jwtService.sign(payload, { secret: constants.REFRESH_SECRET, expiresIn: '15s' });
         
         await this.updateRefreshToken(user.id, refreshToken);
 
@@ -106,7 +106,7 @@ export class AuthService {
 
    }
 
-   async refresh(username: string,refreshToken: string) : Promise<{refresh: string, access: string}> {
+   async refresh(username: string,refreshToken: string) : Promise<{refreshToken: string, accessToken: string}> {
     
     const user = await this.findOneByUsernameWithPassword(username);
 
@@ -124,11 +124,11 @@ export class AuthService {
 
     const accessToken: string = this.jwtService.sign(payload);
 
-    const NewRefreshToken: string = this.jwtService.sign(payload, { secret: constants.REFRESH_SECRET, expiresIn: '7d' });
+    const NewRefreshToken: string = this.jwtService.sign(payload, { secret: constants.REFRESH_SECRET, expiresIn: '15s' });
 
     await this.updateRefreshToken(user.id, NewRefreshToken);
     
-    return {refresh: NewRefreshToken, access:accessToken};
+    return {refreshToken: NewRefreshToken, accessToken:accessToken};
 
    }
 }
