@@ -67,10 +67,10 @@ export class AuthService {
 
         const accessToken: string = this.jwtService.sign(payload);
 
-        const refreshToken: string = this.jwtService.sign(payload, { secret: constants.REFRESH_SECRET, expiresIn: '15s' });
+        const refreshToken: string = this.jwtService.sign(payload, { secret: constants.REFRESH_SECRET, expiresIn: constants.REFRESH_EXPIRES_IN });
         
         await this.updateRefreshToken(user.id, refreshToken);
-
+        
         return { accessToken, role: user.role,user: user.username, id: user.id, refreshToken};
     } else {
         throw new UnauthorizedException("Please check your credentials")
@@ -106,16 +106,19 @@ export class AuthService {
 
    }
 
-   async refresh(username: string,refreshToken: string) : Promise<{refreshToken: string, accessToken: string}> {
+   async refresh(username: string,refreshToken: string) : Promise<{accessToken:string, role: Role, id:string, newRefreshToken: string}> {
     
     const user = await this.findOneByUsernameWithPassword(username);
+    
+    const role = user.role;
+    const id = user.id;
 
     if (!user) 
         throw new BusinessLogicException("The user with the given id was not found", BusinessError.NOT_FOUND);
 
     if (!user.refreshToken) throw new ForbiddenException('Access Denied');
-    
-    const isRefreshTokenValid = await bcrypt.compare(refreshToken, user.refreshToken);
+
+    const isRefreshTokenValid = await bcrypt.compare(refreshToken, user.refreshToken);    
 
     if (!isRefreshTokenValid) 
         throw new UnauthorizedException("Invalid refresh token");
@@ -124,11 +127,11 @@ export class AuthService {
 
     const accessToken: string = this.jwtService.sign(payload);
 
-    const NewRefreshToken: string = this.jwtService.sign(payload, { secret: constants.REFRESH_SECRET, expiresIn: '15s' });
+    const newRefreshToken: string = this.jwtService.sign(payload, { secret: constants.REFRESH_SECRET, expiresIn: constants.REFRESH_EXPIRES_IN });
 
-    await this.updateRefreshToken(user.id, NewRefreshToken);
+    await this.updateRefreshToken(user.id, newRefreshToken);
     
-    return {refreshToken: NewRefreshToken, accessToken:accessToken};
+    return {accessToken:accessToken, role: role, id, newRefreshToken: newRefreshToken};
 
    }
 }

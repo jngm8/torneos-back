@@ -5,5 +5,5 @@ import { Roles } from "./roles.decorator";
 import { AuthGuard } from "@nestjs/passport";
 
 export function Auth(roles: Role[]) {
-  return applyDecorators(Roles(roles), UseGuards(AuthGuard(), RolesGuard));
+  return applyDecorators(Roles(roles), UseGuards(AuthGuard('jwt'), RolesGuard));
 }

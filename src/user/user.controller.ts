@@ -7,6 +7,7 @@ import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-erro
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { Role } from 'src/shared/enums/role.enum';
+// import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('users')
 @Controller('users')
@@ -17,6 +18,7 @@ export class UserController {
         private readonly userService: UserService
     ){}
 
+    @Auth([Role.ADMIN])
     @Get()
     findAll(): Promise<UserEntity[]> {
         return this.userService.findAll();

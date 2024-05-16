@@ -2,7 +2,8 @@
 
 const jwtConstants = {
   JWT_SECRET: 'secretKey',
-  JWT_EXPIRES_IN: '60s',
+  JWT_EXPIRES_IN: '30s',
   REFRESH_SECRET: 'refreshSecretKey',
+  REFRESH_EXPIRES_IN: '40s'
 }
 export default jwtConstants;
