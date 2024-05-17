@@ -11,20 +11,23 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
     canActivate(context: ExecutionContext): boolean {
         const request = context.switchToHttp().getRequest();
-        const authorizationHeader = request.headers['authorization'];
+        console.log(request);
         
+        const authorizationHeader = request.headers['authorization'];
         if (!authorizationHeader) {
             throw new UnauthorizedException('Authorization header not provided');
         }
 
         const accessToken = authorizationHeader.split(' ')[1];
-
+        
         if (!accessToken) {
             throw new UnauthorizedException('Access token not provided');
         }
       
         try {
             const decoded = this.jwtService.verify(accessToken, { secret: constants.JWT_SECRET });
+            console.log(decoded);
+            
             request.user = decoded;
             return true;
         } catch (error) {

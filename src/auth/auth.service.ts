@@ -37,7 +37,7 @@ export class AuthService {
 
     const accessToken: string = this.jwtService.sign(payload);
 
-    const refreshToken: string = this.jwtService.sign(payload, { expiresIn: '7d' });
+    const refreshToken: string = this.jwtService.sign(payload, { expiresIn: constants.REFRESH_EXPIRES_IN });
     
     const hash = await bcrypt.hash(refreshToken, 10);
 
