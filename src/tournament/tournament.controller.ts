@@ -4,7 +4,7 @@ import { BusinessErrorsInterceptor } from '../shared/interceptors/business-error
 import { TournamentEntity } from './tournament.entity';
 import { TournamentDto } from './tournament.dto/tournament.dto';
 import { plainToInstance } from 'class-transformer';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Role } from '../shared/enums/role.enum';
 import { Auth } from '../auth/decorators/auth.decorator';
 
@@ -18,16 +18,19 @@ export class TournamentController {
     ){}
 
     @Get()
+    @ApiOperation({ summary: 'Retrieve all tournaments'})
     findAll(): Promise<TournamentEntity[]> {
         return this.tournamentService.findAll();
     }
 
     @Get(':tournamentId')
+    @ApiOperation({ summary: 'Retrieve one tournament'})
     findOne(@Param('tournamentId') tournamentId: string): Promise<TournamentEntity> {
         return this.tournamentService.findOne(tournamentId);
     }
 
     @Post()
+    @ApiOperation({ summary: 'Create a tournament'})
     @ApiBearerAuth()
     @Auth([Role.ADMIN])
     create(@Body() tournamentDto: TournamentDto) {
@@ -36,6 +39,7 @@ export class TournamentController {
     }
 
     @Put(':tournamentId')
+    @ApiOperation({ summary: 'Update a tournament'})
     @ApiBearerAuth()
     @Auth([Role.SUPER_ADMIN])
     update(@Param('tournamentId') tournamentId: string, @Body() tournamentDto: TournamentDto ) : Promise<TournamentEntity> {
@@ -44,16 +48,12 @@ export class TournamentController {
     }
 
     @Delete(':tournamentId')
+    @ApiOperation({ summary: 'Delete a tournament'})
     @ApiBearerAuth()
     @Auth([Role.SUPER_ADMIN])
     @HttpCode(204)
     delete(@Param('tournamentId') tournamentId: string){
         return this.tournamentService.delete(tournamentId);
     }
-
-
-
-
-
 
 }
