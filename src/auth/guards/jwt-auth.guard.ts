@@ -7,12 +7,11 @@ import constants from "../../shared/constants";
 export class JwtAuthGuard extends AuthGuard('jwt') {
     constructor(private readonly jwtService: JwtService) {
         super();
+        console.log('JwtService:', this.jwtService); // Check if this logs properly
     }
 
     canActivate(context: ExecutionContext): boolean {
-        const request = context.switchToHttp().getRequest();
-        console.log(request);
-        
+        const request = context.switchToHttp().getRequest();        
         const authorizationHeader = request.headers['authorization'];
         if (!authorizationHeader) {
             throw new UnauthorizedException('Authorization header not provided');
@@ -25,9 +24,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
         }
       
         try {
-            const decoded = this.jwtService.verify(accessToken, { secret: constants.JWT_SECRET });
-            console.log(decoded);
-            
+            const decoded = this.jwtService.verify(accessToken, { secret: constants.JWT_SECRET });            
             request.user = decoded;
             return true;
         } catch (error) {
