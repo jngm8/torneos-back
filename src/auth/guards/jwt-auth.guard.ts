@@ -7,7 +7,6 @@ import constants from "../../shared/constants";
 export class JwtAuthGuard extends AuthGuard('jwt') {
     constructor(private readonly jwtService: JwtService) {
         super();
-        console.log('JwtService:', this.jwtService); // Check if this logs properly
     }
 
     canActivate(context: ExecutionContext): boolean {
